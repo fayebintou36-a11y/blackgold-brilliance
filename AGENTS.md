@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Public content uses separate TanStack routes and a shared site shell, so navigation and page metadata stay independently accessible.
+- Stage-one photographs are illustrative assets; appointment requests use the supplied telephone until persistent submission is configured, avoiding simulated saves.

@@ -1,0 +1,6 @@
+import { createFileRoute } from '@tanstack/react-router'
+import { Phone } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Site, PageIntro, pageHead } from '@/components/couture/site'
+export const Route=createFileRoute('/rendez-vous')({head:()=>pageHead('Prendre rendez-vous','Échangez avec Omar Wally Fashion par téléphone pour préparer votre projet de couture et convenir d’un rendez-vous.'),component:Appointment})
+function Appointment(){return <Site><PageIntro title="Votre création commence ici." eyebrow="PRENDRE RENDEZ-VOUS" description="Une tenue sur mesure commence par un échange. Parlons de votre occasion, de votre style et de vos envies."/><section className="editorial-section contact-grid"><div><h2>Imaginons votre tenue.</h2><p className="prose-copy">Couture sur mesure, tenue de cérémonie, création traditionnelle ou retouches : contactez la maison pour discuter de votre projet et convenir d’une date.</p></div><div><h2>Contactez la maison</h2><Button variant="couture" asChild><a href="tel:773735370"><Phone/> APPELER LE 77 373 53 70</a></Button><p className="contact-note">Les rendez-vous se prennent actuellement par téléphone.<br/>Les demandes en ligne seront disponibles une fois leur enregistrement sécurisé configuré.</p></div></section></Site>}

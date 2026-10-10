@@ -1,24 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
-
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
-  component: Index,
-});
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
+import { createFileRoute, Link } from '@tanstack/react-router'
+import { ArrowDown, ArrowUpRight, Scissors, Gem, Sparkles } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Site, AppointmentBand, pageHead } from '@/components/couture/site'
+import { CollectionGrid } from '@/components/couture/collections'
+import hero from '@/assets/couture-hero.jpg'
+export const Route=createFileRoute('/')({head:()=>pageHead('Couture sur mesure & élégance','Découvrez l’univers Omar Wally Fashion : couture sur mesure, tenues traditionnelles et créations de cérémonie.'),component:Index})
+function Index(){return <Site><section className="home-hero"><img className="hero-image" src={hero} alt="Inspiration haute couture : robe noire aux broderies dorées" width={1920} height={1024} fetchPriority="high"/><div className="hero-content"><span className="eyebrow">UNE SIGNATURE. UNE ALLURE. VOTRE ÉLÉGANCE.</span><h1>Omar Wally<br/><em>Fashion</em></h1><p className="hero-tagline">L’ART DE LA COUTURE, L’ÉLÉGANCE DU STYLE.</p><p className="hero-description">Des créations uniques, pensées pour révéler votre élégance et sublimer votre personnalité.</p><div className="hero-actions"><Button variant="couture" asChild><Link to="/creations">DÉCOUVRIR NOS CRÉATIONS <ArrowUpRight/></Link></Button><Button variant="coutureOutline" asChild><Link to="/rendez-vous">PRENDRE RENDEZ-VOUS</Link></Button></div></div><span className="hero-bottom"><ArrowDown size={13}/> L’ÉLÉGANCE DANS CHAQUE DÉTAIL</span><span className="hero-caption">VISUEL D’INSPIRATION</span></section><section className="signature-band" aria-label="Nos valeurs">{[{Icon:Scissors,title:'Créations sur mesure',copy:'Pensées pour vous, et vous seul.'},{Icon:Gem,title:'Finitions raffinées',copy:'L’exigence au cœur de chaque détail.'},{Icon:Sparkles,title:'Style et élégance',copy:'Une allure qui vous ressemble.'}].map(v=><div className="signature-item" key={v.title}><v.Icon/><div><h3>{v.title}</h3><p>{v.copy}</p></div></div>)}</section><section className="editorial-section ivory-section"><div className="section-heading"><div><span className="eyebrow">L’UNIVERS OMAR WALLY</span><h2>Des créations, une signature.</h2></div><Link className="text-link" to="/creations">EXPLORER NOS CRÉATIONS <ArrowUpRight size={15}/></Link></div><CollectionGrid/></section><section className="editorial-section about-grid"><img className="about-image" src={hero} alt="Détail d’une inspiration de robe brodée" width={1920} height={1024} loading="lazy"/><div><span className="eyebrow">LA MAISON</span><h2>Une vision de la couture,<br/><em>une signature unique.</em></h2><p className="prose-copy">Omar Wally Fashion est une marque dédiée à la création de vêtements élégants et à la confection de tenues sur mesure. Chaque projet est une rencontre entre vos envies, le choix des matières et le soin du détail.</p><Link to="/a-propos" className="text-link mt-7">DÉCOUVRIR LA MAISON <ArrowUpRight size={15}/></Link></div></section><AppointmentBand/></Site>}

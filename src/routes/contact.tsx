@@ -1,0 +1,6 @@
+import { createFileRoute, Link } from '@tanstack/react-router'
+import { Phone, ArrowUpRight } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Site, PageIntro, pageHead } from '@/components/couture/site'
+export const Route=createFileRoute('/contact')({head:()=>pageHead('Contact','Contactez Omar Wally Fashion au 77 373 53 70 pour échanger sur votre projet de couture.'),component:Contact})
+function Contact(){return <Site><PageIntro title="Parlons de votre prochaine tenue." eyebrow="CONTACT" description="Une question, une idée, une occasion à célébrer ? Nous sommes à votre écoute."/><section className="editorial-section contact-grid"><div><h2>Omar Wally Fashion</h2><a className="contact-phone" href="tel:773735370"><Phone size={23}/>77 373 53 70</a><p className="contact-note">Le numéro indiqué est celui de votre logo.<br/>L’adresse de l’atelier, les horaires et les autres coordonnées seront ajoutés après confirmation.</p></div><div><h2>Un projet sur mesure ?</h2><p className="prose-copy mb-7">Prenons le temps d’échanger sur vos envies et les détails de votre création.</p><Button variant="couture" asChild><Link to="/rendez-vous">PRENDRE RENDEZ-VOUS <ArrowUpRight/></Link></Button></div></section></Site>}
