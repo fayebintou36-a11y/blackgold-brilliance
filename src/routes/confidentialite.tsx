@@ -1,0 +1,4 @@
+import { createFileRoute } from '@tanstack/react-router'
+import { Site, PageIntro, pageHead } from '@/components/couture/site'
+export const Route=createFileRoute('/confidentialite')({head:()=>pageHead('Confidentialité','Informations sur les données personnelles et les contacts du site Omar Wally Fashion.'),component:Privacy})
+function Privacy(){return <Site><PageIntro title="Politique de confidentialité" eyebrow="INFORMATIONS" description="Transparence et respect de vos données."/><section className="editorial-section"><h2 className="text-3xl mb-5">Prise de contact</h2><p className="prose-copy">Cette première version ne comporte pas de formulaire de collecte de données personnelles ni de compte visiteur. La prise de rendez-vous s’effectue par téléphone. La politique sera complétée avant l’activation des demandes en ligne, avec les informations du responsable, les durées de conservation et les modalités d’exercice de vos droits.</p></section></Site>}
