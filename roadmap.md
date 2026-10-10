@@ -3,6 +3,11 @@
 - [x] Verify navigation, gallery and mobile layout.
 
 ## Secure administration
+## Homepage enrichment
+- [ ] Develop a Senegalese couture-focused homepage with elegant animations and illustrative fashion/atelier photographs.
+- [ ] Verify homepage navigation, animations, reduced-motion support and narrow-screen layout.
+
+## Secure administration
 - [ ] Connect the user's Cloudflare account and identify D1/R2 resources. Blocked: user declined the Cloudflare connection.
 - [ ] Implement secure administrator authentication without personal profiles. Blocked: Cloudflare connection is required.
 - [ ] Implement persistent collection, piece and public-page content management. Blocked: Cloudflare connection is required.
