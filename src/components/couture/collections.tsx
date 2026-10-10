@@ -1,0 +1,8 @@
+import { Link } from '@tanstack/react-router'
+import { ArrowUpRight } from 'lucide-react'
+import ivory from '@/assets/collection-ivoire.jpg'
+import burgundy from '@/assets/collection-grenat.jpg'
+import black from '@/assets/collection-noir.jpg'
+import hero from '@/assets/couture-hero.jpg'
+export const creations=[{name:'Éclat d’ivoire',category:'Tenues traditionnelles',description:'Une silhouette intemporelle, sublimée par la finesse des broderies.',image:ivory},{name:'Élégance grenat',category:'Mode femme',description:'Des lignes sculptées et un drapé délicat pour les grandes occasions.',image:burgundy},{name:'Signature noire',category:'Mode homme',description:'La profondeur du noir rencontre la précision du détail.',image:black},{name:'Noir & or',category:'Tenues de cérémonie',description:'Une inspiration de cérémonie aux finitions lumineuses.',image:hero}]
+export function CollectionGrid({limit=3}:{limit?:number}){return <><div className="collection-grid">{creations.slice(0,limit).map(c=><article key={c.name} className="collection-tile"><Link to="/galerie" className="block" aria-label={`Découvrir ${c.name}`}><div className="collection-image"><img src={c.image} alt={c.name+' — photographie illustrative de couture'} width={500} height={1024} loading="lazy"/></div></Link><p className="collection-category">{c.category}</p><h3>{c.name}</h3><p className="collection-description">{c.description}</p><Link to="/galerie" className="collection-discover">DÉCOUVRIR <ArrowUpRight size={14}/></Link></article>)}</div><p className="illustration-note">Sélection d’inspiration · Photographies illustratives, en attendant les créations de la maison.</p></>}
