@@ -18,6 +18,7 @@ import { Route as GalerieRouteImport } from './routes/galerie'
 import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as RendezVousRouteImport } from './routes/rendez-vous'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as ApiPublicStyleAdviceRouteImport } from './routes/api/public/style-advice'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -64,6 +65,11 @@ const ServicesRoute = ServicesRouteImport.update({
   path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicStyleAdviceRoute = ApiPublicStyleAdviceRouteImport.update({
+  id: '/api/public/style-advice',
+  path: '/api/public/style-advice',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/mentions-legales': typeof MentionsLegalesRoute
   '/rendez-vous': typeof RendezVousRoute
   '/services': typeof ServicesRoute
+  '/api/public/style-advice': typeof ApiPublicStyleAdviceRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -86,6 +93,7 @@ export interface FileRoutesByTo {
   '/mentions-legales': typeof MentionsLegalesRoute
   '/rendez-vous': typeof RendezVousRoute
   '/services': typeof ServicesRoute
+  '/api/public/style-advice': typeof ApiPublicStyleAdviceRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -98,6 +106,7 @@ export interface FileRoutesById {
   '/mentions-legales': typeof MentionsLegalesRoute
   '/rendez-vous': typeof RendezVousRoute
   '/services': typeof ServicesRoute
+  '/api/public/style-advice': typeof ApiPublicStyleAdviceRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/rendez-vous'
     | '/services'
+    | '/api/public/style-advice'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/rendez-vous'
     | '/services'
+    | '/api/public/style-advice'
   id:
     | '__root__'
     | '/'
@@ -133,6 +144,7 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/rendez-vous'
     | '/services'
+    | '/api/public/style-advice'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -145,6 +157,7 @@ export interface RootRouteChildren {
   MentionsLegalesRoute: typeof MentionsLegalesRoute
   RendezVousRoute: typeof RendezVousRoute
   ServicesRoute: typeof ServicesRoute
+  ApiPublicStyleAdviceRoute: typeof ApiPublicStyleAdviceRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -212,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/style-advice': {
+      id: '/api/public/style-advice'
+      path: '/api/public/style-advice'
+      fullPath: '/api/public/style-advice'
+      preLoaderRoute: typeof ApiPublicStyleAdviceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -225,6 +245,7 @@ const rootRouteChildren: RootRouteChildren = {
   MentionsLegalesRoute: MentionsLegalesRoute,
   RendezVousRoute: RendezVousRoute,
   ServicesRoute: ServicesRoute,
+  ApiPublicStyleAdviceRoute: ApiPublicStyleAdviceRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
