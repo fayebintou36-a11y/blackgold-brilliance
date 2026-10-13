@@ -14,7 +14,27 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      ai_gateway_safety_state: {
+        Row: {
+          blocked_at: string
+          id: string
+          message: string
+          status: number
+        }
+        Insert: {
+          blocked_at?: string
+          id: string
+          message: string
+          status: number
+        }
+        Update: {
+          blocked_at?: string
+          id?: string
+          message?: string
+          status?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
