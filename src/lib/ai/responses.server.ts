@@ -27,6 +27,7 @@ export function createResponsesCall(
     ...(instructions ? { system: instructions } : {}),
     messages,
     abortSignal: request.signal,
+    maxRetries: 0,
     providerOptions: {
       openai: {
         store: false,
