@@ -11,3 +11,4 @@
 
 - Public content uses separate TanStack routes and a shared site shell, so navigation and page metadata stay independently accessible.
 - Stage-one photographs are illustrative assets; appointment requests use the supplied telephone until persistent submission is configured, avoiding simulated saves.
+- Outfit advice uses a same-origin validated streaming server endpoint with server-only AI Gateway helpers; a service-only circuit breaker persists access blocks without storing visitor descriptions.
