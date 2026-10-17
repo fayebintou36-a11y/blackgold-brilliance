@@ -268,15 +268,16 @@ h1,h2,h3 { font-family: var(--font-heading); font-weight: 400; letter-spacing: 0
 .advice-prose ol { list-style:decimal; }
 .advice-prose strong { font-weight:600; }
 .atelier-image { aspect-ratio:4/5; object-position:center; }
-.senegal-hero { min-height:560px; height:min(710px, calc(100svh - 185px)); }
+.senegal-hero { min-height:560px; height:min(760px, calc(100svh - 185px)); }
+.senegal-hero .hero-image { object-position:center 24%; }
 .senegal-hero .hero-content { padding-top:75px; max-width:650px; }
 .senegal-hero .hero-description { color:var(--foreground); }
 .advisor-spinner { animation:advisor-spin 1.5s linear infinite; }
 @keyframes advisor-spin { to { transform:rotate(360deg); } }
-@media(min-width:1600px) { .senegal-hero .hero-image { object-position:center 42%; } }
+@media(min-width:1600px) { .senegal-hero .hero-image { object-position:center 20%; } }
 @media(max-width:760px) {
  .senegal-hero { height:auto; min-height:0; }
- .senegal-hero .hero-image { height:300px; object-position:right center; opacity:1; }
+ .senegal-hero .hero-image { height:310px; object-position:70% center; opacity:1; }
  .senegal-hero:after { display:none; }
  .senegal-hero .hero-content { padding:325px 6% 65px; }
  .senegal-hero .hero-content h1 { font-size:52px; margin:18px 0; }
