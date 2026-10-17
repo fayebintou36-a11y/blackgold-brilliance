@@ -183,7 +183,7 @@ h1,h2,h3 { font-family: var(--font-heading); font-weight: 400; letter-spacing: 0
 .hero-tagline { font-size: 11px; line-height: 1.8; margin-bottom: 19px; }
 .hero-description { color: var(--muted-foreground); font-size: 12px; line-height: 2; max-width: 390px; }
 .hero-actions { display: flex; gap: 14px; margin-top: 33px; }
-.hero-caption { position: absolute; z-index: 1; right: 5%; bottom: 28px; font-size: 8px; color: var(--muted-foreground); }
+.hero-caption { position: absolute; z-index: 1; right: 5%; bottom: 28px; font-size: 8px; letter-spacing: 0.08em; color: var(--ivory); background: oklch(0.14 0.012 70 / 78%); border: 1px solid oklch(0.79 0.09 85 / 26%); padding: 7px 12px; }
 .hero-bottom { position:absolute; z-index:1; bottom:28px; left:8%; display:flex; gap:15px; align-items:center; font-size:8px; color:var(--muted-foreground); }
 .signature-band { padding: 29px 8%; display: grid; grid-template-columns: repeat(3,1fr); border-bottom: 1px solid var(--border); }
 .signature-item { display:flex; align-items:center; gap:18px; justify-content:center; border-right:1px solid var(--border); }
@@ -268,17 +268,18 @@ h1,h2,h3 { font-family: var(--font-heading); font-weight: 400; letter-spacing: 0
 .advice-prose ol { list-style:decimal; }
 .advice-prose strong { font-weight:600; }
 .atelier-image { aspect-ratio:4/5; object-position:center; }
-.senegal-hero { min-height:560px; height:min(710px, calc(100svh - 185px)); }
+.senegal-hero { min-height:560px; height:min(760px, calc(100svh - 185px)); }
+.senegal-hero .hero-image { object-position:center 24%; }
 .senegal-hero .hero-content { padding-top:75px; max-width:650px; }
 .senegal-hero .hero-description { color:var(--foreground); }
 .advisor-spinner { animation:advisor-spin 1.5s linear infinite; }
 @keyframes advisor-spin { to { transform:rotate(360deg); } }
-@media(min-width:1600px) { .senegal-hero .hero-image { object-position:center 42%; } }
+@media(min-width:1600px) { .senegal-hero .hero-image { object-position:center 20%; } }
 @media(max-width:760px) {
  .senegal-hero { height:auto; min-height:0; }
- .senegal-hero .hero-image { height:300px; object-position:right center; opacity:1; }
+ .senegal-hero .hero-image { height:340px; object-position:96% center; opacity:1; }
  .senegal-hero:after { display:none; }
- .senegal-hero .hero-content { padding:325px 6% 65px; }
+ .senegal-hero .hero-content { padding:370px 6% 65px; }
  .senegal-hero .hero-content h1 { font-size:52px; margin:18px 0; }
  .senegal-hero .hero-actions { gap:10px; margin-top:24px; }
  .senegal-hero .hero-bottom { display:none; }
