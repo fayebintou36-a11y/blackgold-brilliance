@@ -279,7 +279,7 @@ h1,h2,h3 { font-family: var(--font-heading); font-weight: 400; letter-spacing: 0
  .senegal-hero { height:auto; min-height:0; }
  .senegal-hero .hero-image { height:340px; object-position:96% center; opacity:1; }
  .senegal-hero:after { display:none; }
- .senegal-hero .hero-content { padding:325px 6% 65px; }
+ .senegal-hero .hero-content { padding:370px 6% 65px; }
  .senegal-hero .hero-content h1 { font-size:52px; margin:18px 0; }
  .senegal-hero .hero-actions { gap:10px; margin-top:24px; }
  .senegal-hero .hero-bottom { display:none; }
