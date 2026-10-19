@@ -8,6 +8,13 @@
       "when": 1791853994620,
       "tag": "0000_ai_gateway_safety_state",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1792372941330,
+      "tag": "0001_create_admin_schema",
+      "breakpoints": true
     }
   ]
 }
