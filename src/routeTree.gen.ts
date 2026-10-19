@@ -21,6 +21,9 @@ import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as RendezVousRouteImport } from './routes/rendez-vous'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedAdminCollectionsRouteImport } from './routes/_authenticated/admin.collections'
+import { Route as AuthenticatedAdminContenusRouteImport } from './routes/_authenticated/admin.contenus'
+import { Route as AuthenticatedAdminPiecesRouteImport } from './routes/_authenticated/admin.pieces'
 import { Route as ApiPublicStyleAdviceRouteImport } from './routes/api/public/style-advice'
 
 const IndexRoute = IndexRouteImport.update({
@@ -82,6 +85,24 @@ const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAdminCollectionsRoute =
+  AuthenticatedAdminCollectionsRouteImport.update({
+    id: '/collections',
+    path: '/collections',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminContenusRoute =
+  AuthenticatedAdminContenusRouteImport.update({
+    id: '/contenus',
+    path: '/contenus',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminPiecesRoute =
+  AuthenticatedAdminPiecesRouteImport.update({
+    id: '/pieces',
+    path: '/pieces',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 const ApiPublicStyleAdviceRoute = ApiPublicStyleAdviceRouteImport.update({
   id: '/api/public/style-advice',
   path: '/api/public/style-advice',
@@ -99,7 +120,10 @@ export interface FileRoutesByFullPath {
   '/mentions-legales': typeof MentionsLegalesRoute
   '/rendez-vous': typeof RendezVousRoute
   '/services': typeof ServicesRoute
-  '/admin': typeof AuthenticatedAdminRoute
+  '/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/admin/collections': typeof AuthenticatedAdminCollectionsRoute
+  '/admin/contenus': typeof AuthenticatedAdminContenusRoute
+  '/admin/pieces': typeof AuthenticatedAdminPiecesRoute
   '/api/public/style-advice': typeof ApiPublicStyleAdviceRoute
 }
 export interface FileRoutesByTo {
@@ -113,7 +137,10 @@ export interface FileRoutesByTo {
   '/mentions-legales': typeof MentionsLegalesRoute
   '/rendez-vous': typeof RendezVousRoute
   '/services': typeof ServicesRoute
-  '/admin': typeof AuthenticatedAdminRoute
+  '/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/admin/collections': typeof AuthenticatedAdminCollectionsRoute
+  '/admin/contenus': typeof AuthenticatedAdminContenusRoute
+  '/admin/pieces': typeof AuthenticatedAdminPiecesRoute
   '/api/public/style-advice': typeof ApiPublicStyleAdviceRoute
 }
 export interface FileRoutesById {
@@ -129,7 +156,10 @@ export interface FileRoutesById {
   '/mentions-legales': typeof MentionsLegalesRoute
   '/rendez-vous': typeof RendezVousRoute
   '/services': typeof ServicesRoute
-  '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/_authenticated/admin/collections': typeof AuthenticatedAdminCollectionsRoute
+  '/_authenticated/admin/contenus': typeof AuthenticatedAdminContenusRoute
+  '/_authenticated/admin/pieces': typeof AuthenticatedAdminPiecesRoute
   '/api/public/style-advice': typeof ApiPublicStyleAdviceRoute
 }
 export interface FileRouteTypes {
@@ -146,6 +176,9 @@ export interface FileRouteTypes {
     | '/rendez-vous'
     | '/services'
     | '/admin'
+    | '/admin/collections'
+    | '/admin/contenus'
+    | '/admin/pieces'
     | '/api/public/style-advice'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -160,6 +193,9 @@ export interface FileRouteTypes {
     | '/rendez-vous'
     | '/services'
     | '/admin'
+    | '/admin/collections'
+    | '/admin/contenus'
+    | '/admin/pieces'
     | '/api/public/style-advice'
   id:
     | '__root__'
@@ -175,6 +211,9 @@ export interface FileRouteTypes {
     | '/rendez-vous'
     | '/services'
     | '/_authenticated/admin'
+    | '/_authenticated/admin/collections'
+    | '/_authenticated/admin/contenus'
+    | '/_authenticated/admin/pieces'
     | '/api/public/style-advice'
   fileRoutesById: FileRoutesById
 }
@@ -279,6 +318,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/collections': {
+      id: '/_authenticated/admin/collections'
+      path: '/collections'
+      fullPath: '/admin/collections'
+      preLoaderRoute: typeof AuthenticatedAdminCollectionsRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/contenus': {
+      id: '/_authenticated/admin/contenus'
+      path: '/contenus'
+      fullPath: '/admin/contenus'
+      preLoaderRoute: typeof AuthenticatedAdminContenusRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/pieces': {
+      id: '/_authenticated/admin/pieces'
+      path: '/pieces'
+      fullPath: '/admin/pieces'
+      preLoaderRoute: typeof AuthenticatedAdminPiecesRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
     '/api/public/style-advice': {
       id: '/api/public/style-advice'
       path: '/api/public/style-advice'
@@ -289,12 +349,27 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedAdminRouteChildren {
+  AuthenticatedAdminCollectionsRoute: typeof AuthenticatedAdminCollectionsRoute
+  AuthenticatedAdminContenusRoute: typeof AuthenticatedAdminContenusRoute
+  AuthenticatedAdminPiecesRoute: typeof AuthenticatedAdminPiecesRoute
+}
+
+const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
+  AuthenticatedAdminCollectionsRoute: AuthenticatedAdminCollectionsRoute,
+  AuthenticatedAdminContenusRoute: AuthenticatedAdminContenusRoute,
+  AuthenticatedAdminPiecesRoute: AuthenticatedAdminPiecesRoute,
+}
+
+const AuthenticatedAdminRouteWithChildren =
+  AuthenticatedAdminRoute._addFileChildren(AuthenticatedAdminRouteChildren)
+
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRouteWithChildren
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedAdminRoute: AuthenticatedAdminRouteWithChildren,
 }
 
 const AuthenticatedRouteRouteWithChildren =
