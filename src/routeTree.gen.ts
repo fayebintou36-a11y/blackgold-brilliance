@@ -10,7 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AProposRouteImport } from './routes/a-propos'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CreationsRouteImport } from './routes/creations'
@@ -18,6 +20,7 @@ import { Route as GalerieRouteImport } from './routes/galerie'
 import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as RendezVousRouteImport } from './routes/rendez-vous'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as ApiPublicStyleAdviceRouteImport } from './routes/api/public/style-advice'
 
 const IndexRoute = IndexRouteImport.update({
@@ -25,9 +28,18 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AProposRoute = AProposRouteImport.update({
   id: '/a-propos',
   path: '/a-propos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ConfidentialiteRoute = ConfidentialiteRouteImport.update({
@@ -65,6 +77,11 @@ const ServicesRoute = ServicesRouteImport.update({
   path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const ApiPublicStyleAdviceRoute = ApiPublicStyleAdviceRouteImport.update({
   id: '/api/public/style-advice',
   path: '/api/public/style-advice',
@@ -74,6 +91,7 @@ const ApiPublicStyleAdviceRoute = ApiPublicStyleAdviceRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/a-propos': typeof AProposRoute
+  '/auth': typeof AuthRoute
   '/confidentialite': typeof ConfidentialiteRoute
   '/contact': typeof ContactRoute
   '/creations': typeof CreationsRoute
@@ -81,11 +99,13 @@ export interface FileRoutesByFullPath {
   '/mentions-legales': typeof MentionsLegalesRoute
   '/rendez-vous': typeof RendezVousRoute
   '/services': typeof ServicesRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/api/public/style-advice': typeof ApiPublicStyleAdviceRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/a-propos': typeof AProposRoute
+  '/auth': typeof AuthRoute
   '/confidentialite': typeof ConfidentialiteRoute
   '/contact': typeof ContactRoute
   '/creations': typeof CreationsRoute
@@ -93,12 +113,15 @@ export interface FileRoutesByTo {
   '/mentions-legales': typeof MentionsLegalesRoute
   '/rendez-vous': typeof RendezVousRoute
   '/services': typeof ServicesRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/api/public/style-advice': typeof ApiPublicStyleAdviceRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/a-propos': typeof AProposRoute
+  '/auth': typeof AuthRoute
   '/confidentialite': typeof ConfidentialiteRoute
   '/contact': typeof ContactRoute
   '/creations': typeof CreationsRoute
@@ -106,6 +129,7 @@ export interface FileRoutesById {
   '/mentions-legales': typeof MentionsLegalesRoute
   '/rendez-vous': typeof RendezVousRoute
   '/services': typeof ServicesRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/api/public/style-advice': typeof ApiPublicStyleAdviceRoute
 }
 export interface FileRouteTypes {
@@ -113,6 +137,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/a-propos'
+    | '/auth'
     | '/confidentialite'
     | '/contact'
     | '/creations'
@@ -120,11 +145,13 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/rendez-vous'
     | '/services'
+    | '/admin'
     | '/api/public/style-advice'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/a-propos'
+    | '/auth'
     | '/confidentialite'
     | '/contact'
     | '/creations'
@@ -132,11 +159,14 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/rendez-vous'
     | '/services'
+    | '/admin'
     | '/api/public/style-advice'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/a-propos'
+    | '/auth'
     | '/confidentialite'
     | '/contact'
     | '/creations'
@@ -144,12 +174,15 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/rendez-vous'
     | '/services'
+    | '/_authenticated/admin'
     | '/api/public/style-advice'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AProposRoute: typeof AProposRoute
+  AuthRoute: typeof AuthRoute
   ConfidentialiteRoute: typeof ConfidentialiteRoute
   ContactRoute: typeof ContactRoute
   CreationsRoute: typeof CreationsRoute
@@ -169,11 +202,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/a-propos': {
       id: '/a-propos'
       path: '/a-propos'
       fullPath: '/a-propos'
       preLoaderRoute: typeof AProposRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/confidentialite': {
@@ -225,6 +272,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/api/public/style-advice': {
       id: '/api/public/style-advice'
       path: '/api/public/style-advice'
@@ -235,9 +289,22 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AProposRoute: AProposRoute,
+  AuthRoute: AuthRoute,
   ConfidentialiteRoute: ConfidentialiteRoute,
   ContactRoute: ContactRoute,
   CreationsRoute: CreationsRoute,
