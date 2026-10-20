@@ -4,6 +4,7 @@
 
 ## Secure administration
 ## Homepage enrichment
+- [ ] Replace the three selected collection photos with supplied images and verify refined presentation, scroll reveals and gallery readback.
 - [x] Add integrated AI Gateway outfit advice for occasion, preferences and budget; verify a real recommendation.
 - [x] Integrate both new Senegalese couture visuals on mobile and large screens.
 - [x] Develop a Senegalese couture-focused homepage with elegant animations and illustrative fashion/atelier photographs.

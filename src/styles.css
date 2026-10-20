@@ -206,6 +206,22 @@ h1,h2,h3 { font-family: var(--font-heading); font-weight: 400; letter-spacing: 0
 .collection-tile h3 { font-size:27px; }
 .collection-description { font-size:10px; line-height:1.9; margin-top:8px; color:var(--ivory-muted); }
 .collection-discover { margin-top:16px; display:flex; gap:12px; align-items:center; font-size:9px; }
+.collection-editorial .collection-tile { min-width:0; border-bottom:1px solid var(--border); padding-bottom:22px; opacity:1; transform:none; transition:opacity .85s ease, transform .85s cubic-bezier(.22,1,.36,1); }
+.collection-editorial .collection-tile:nth-child(2) { transition-delay:.12s; }
+.collection-editorial .collection-tile:nth-child(3) { transition-delay:.24s; }
+.collection-editorial .collection-pending { opacity:0; transform:translateY(28px); }
+.collection-editorial .collection-image { aspect-ratio:3/4; background:var(--ink); }
+.collection-image.collection-full-length img { object-fit:contain; }
+.collection-image.collection-runway img { object-position:54% center; }
+.collection-image.collection-black img { object-position:center 35%; }
+.collection-number { position:absolute; top:14px; left:14px; font-family:var(--font-heading); font-size:23px; line-height:1; color:var(--ivory); background:var(--ink); padding:8px 10px; }
+.collection-photo-action { position:absolute; bottom:14px; right:14px; width:38px; height:38px; display:grid; place-items:center; background:var(--primary); color:var(--primary-foreground); opacity:0; transform:translateY(8px); transition:opacity .3s, transform .3s; }
+.collection-photo-link:hover .collection-photo-action,.collection-photo-link:focus-visible .collection-photo-action { opacity:1; transform:none; }
+.collection-photo-link:focus-visible { outline:2px solid var(--primary); outline-offset:4px; }
+.collection-discover svg { transition:transform .3s; }
+.collection-discover:hover svg { transform:translate(3px,-3px); }
+@media(hover:none) { .collection-photo-action { opacity:1; transform:none; } }
+@media(prefers-reduced-motion:reduce) { .collection-editorial .collection-pending { opacity:1; transform:none; } }
 .illustration-note { font-size:9px; color:var(--ivory-muted); margin-top:28px; }
 .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
 .about-grid h2 { font-size:48px; margin:20px 0; line-height:1.1; }
