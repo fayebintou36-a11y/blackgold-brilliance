@@ -284,6 +284,15 @@ h1,h2,h3 { font-family: var(--font-heading); font-weight: 400; letter-spacing: 0
 .advice-prose ol { list-style:decimal; }
 .advice-prose strong { font-weight:600; }
 .atelier-image { aspect-ratio:4/5; object-position:center; }
+.atelier-editorial .atelier-photo { min-width:0; margin:0; }
+.atelier-photo-frame { overflow:hidden; border:1px solid var(--border); }
+.atelier-editorial .atelier-image { aspect-ratio:3/4; object-position:center 40%; transition:transform 1s cubic-bezier(.22,1,.36,1); }
+.atelier-photo:hover .atelier-image { transform:scale(1.025); }
+.atelier-photo-caption { display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; padding:16px 0; border-bottom:1px solid var(--border); font-size:8px; color:var(--primary); }
+.atelier-editorial > figure,.atelier-editorial > div { opacity:1; transform:none; transition:opacity 1s ease, transform 1s cubic-bezier(.22,1,.36,1); }
+.atelier-editorial > div { transition-delay:.18s; }
+.atelier-pending > figure,.atelier-pending > div { opacity:0; transform:translateY(30px); }
+@media(prefers-reduced-motion:reduce) { .atelier-pending > figure,.atelier-pending > div { opacity:1; transform:none; } }
 .senegal-hero { min-height:560px; height:min(760px, calc(100svh - 185px)); }
 .senegal-hero .hero-image { object-position:center 24%; }
 .senegal-hero .hero-content { padding-top:75px; max-width:650px; }
