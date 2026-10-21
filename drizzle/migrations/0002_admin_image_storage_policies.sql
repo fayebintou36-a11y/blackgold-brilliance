@@ -1,0 +1,3 @@
+CREATE POLICY "Admins upload couture images" ON storage.objects FOR INSERT TO authenticated WITH CHECK (bucket_id = 'couture-images' AND public.has_role(auth.uid(), 'admin'));
+CREATE POLICY "Admins read couture images" ON storage.objects FOR SELECT TO authenticated USING (bucket_id = 'couture-images' AND public.has_role(auth.uid(), 'admin'));
+CREATE POLICY "Admins remove couture images" ON storage.objects FOR DELETE TO authenticated USING (bucket_id = 'couture-images' AND public.has_role(auth.uid(), 'admin'));

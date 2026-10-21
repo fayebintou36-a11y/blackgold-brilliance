@@ -3,6 +3,7 @@ import { z } from 'zod'
 export const imageUrlSchema = z.string().max(1000).refine(value => {
   if (value === '') return true
   if (value.startsWith('/__l5e/assets-v1/')) return !value.includes('..')
+  if (/^\/api\/public\/couture-image\?file=[a-f0-9-]{36}\.(jpeg|png|webp)$/.test(value)) return true
   try { return new URL(value).protocol === 'https:' } catch { return false }
 }, 'Utilisez une adresse HTTPS ou une photo téléchargée.')
 
