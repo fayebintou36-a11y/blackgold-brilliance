@@ -4,6 +4,9 @@ import { LogOut } from 'lucide-react'
 import { supabase } from '@/integrations/supabase/client'
 import { getMyRoles } from '@/lib/admin.functions'
 import logo from '@/assets/omar-wally-logo.jpeg.asset.json'
+import { Button } from '@/components/ui/button'
+import { useQueryClient } from '@tanstack/react-query'
+import { useServerFn } from '@tanstack/react-start'
 
 const adminNav = [
   { to: '/admin', label: 'Tableau de bord' },
@@ -14,19 +17,23 @@ const adminNav = [
 
 export function AdminShell({ children, title }: { children: React.ReactNode; title: string }) {
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
+  const rolesFn = useServerFn(getMyRoles)
   const [state, setState] = useState<'loading' | 'admin' | 'denied'>('loading')
 
   useEffect(() => {
     let active = true
-    getMyRoles()
+    rolesFn()
       .then((roles) => { if (active) setState(roles.includes('admin') ? 'admin' : 'denied') })
       .catch(() => { if (active) setState('denied') })
     return () => { active = false }
   }, [])
 
   async function signOut() {
+    await queryClient.cancelQueries()
+    queryClient.clear()
     await supabase.auth.signOut()
-    navigate({ to: '/auth' })
+    await navigate({ to: '/auth', replace:true })
   }
 
   if (state === 'loading') {
@@ -38,7 +45,7 @@ export function AdminShell({ children, title }: { children: React.ReactNode; tit
         <div className="admin-denied">
           <h1>Accès réservé</h1>
           <p>Ce compte ne dispose pas des droits d’administration.</p>
-          <button className="text-link" onClick={signOut}>SE DÉCONNECTER</button>
+          <Button variant="coutureOutline" onClick={signOut}>SE DÉCONNECTER</Button>
         </div>
       </div>
     )
@@ -55,7 +62,7 @@ export function AdminShell({ children, title }: { children: React.ReactNode; tit
             </Link>
           ))}
         </nav>
-        <button className="admin-signout" onClick={signOut}><LogOut size={15} /> Déconnexion</button>
+        <Button variant="ghost" className="admin-signout" onClick={signOut}><LogOut size={15} /> Déconnexion</Button>
       </header>
       <main className="admin-main">
         <h1>{title}</h1>
