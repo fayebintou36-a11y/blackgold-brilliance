@@ -19,11 +19,13 @@ import { Route as CreationsRouteImport } from './routes/creations'
 import { Route as GalerieRouteImport } from './routes/galerie'
 import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as RendezVousRouteImport } from './routes/rendez-vous'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAdminCollectionsRouteImport } from './routes/_authenticated/admin.collections'
 import { Route as AuthenticatedAdminContenusRouteImport } from './routes/_authenticated/admin.contenus'
 import { Route as AuthenticatedAdminPiecesRouteImport } from './routes/_authenticated/admin.pieces'
+import { Route as ApiPublicCoutureImageRouteImport } from './routes/api/public/couture-image'
 import { Route as ApiPublicStyleAdviceRouteImport } from './routes/api/public/style-advice'
 
 const IndexRoute = IndexRouteImport.update({
@@ -75,6 +77,11 @@ const RendezVousRoute = RendezVousRouteImport.update({
   path: '/rendez-vous',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
@@ -103,6 +110,11 @@ const AuthenticatedAdminPiecesRoute =
     path: '/pieces',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
+const ApiPublicCoutureImageRoute = ApiPublicCoutureImageRouteImport.update({
+  id: '/api/public/couture-image',
+  path: '/api/public/couture-image',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicStyleAdviceRoute = ApiPublicStyleAdviceRouteImport.update({
   id: '/api/public/style-advice',
   path: '/api/public/style-advice',
@@ -119,11 +131,13 @@ export interface FileRoutesByFullPath {
   '/galerie': typeof GalerieRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/rendez-vous': typeof RendezVousRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/services': typeof ServicesRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/admin/collections': typeof AuthenticatedAdminCollectionsRoute
   '/admin/contenus': typeof AuthenticatedAdminContenusRoute
   '/admin/pieces': typeof AuthenticatedAdminPiecesRoute
+  '/api/public/couture-image': typeof ApiPublicCoutureImageRoute
   '/api/public/style-advice': typeof ApiPublicStyleAdviceRoute
 }
 export interface FileRoutesByTo {
@@ -136,11 +150,13 @@ export interface FileRoutesByTo {
   '/galerie': typeof GalerieRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/rendez-vous': typeof RendezVousRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/services': typeof ServicesRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/admin/collections': typeof AuthenticatedAdminCollectionsRoute
   '/admin/contenus': typeof AuthenticatedAdminContenusRoute
   '/admin/pieces': typeof AuthenticatedAdminPiecesRoute
+  '/api/public/couture-image': typeof ApiPublicCoutureImageRoute
   '/api/public/style-advice': typeof ApiPublicStyleAdviceRoute
 }
 export interface FileRoutesById {
@@ -155,11 +171,13 @@ export interface FileRoutesById {
   '/galerie': typeof GalerieRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/rendez-vous': typeof RendezVousRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/services': typeof ServicesRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/_authenticated/admin/collections': typeof AuthenticatedAdminCollectionsRoute
   '/_authenticated/admin/contenus': typeof AuthenticatedAdminContenusRoute
   '/_authenticated/admin/pieces': typeof AuthenticatedAdminPiecesRoute
+  '/api/public/couture-image': typeof ApiPublicCoutureImageRoute
   '/api/public/style-advice': typeof ApiPublicStyleAdviceRoute
 }
 export interface FileRouteTypes {
@@ -174,11 +192,13 @@ export interface FileRouteTypes {
     | '/galerie'
     | '/mentions-legales'
     | '/rendez-vous'
+    | '/reset-password'
     | '/services'
     | '/admin'
     | '/admin/collections'
     | '/admin/contenus'
     | '/admin/pieces'
+    | '/api/public/couture-image'
     | '/api/public/style-advice'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -191,11 +211,13 @@ export interface FileRouteTypes {
     | '/galerie'
     | '/mentions-legales'
     | '/rendez-vous'
+    | '/reset-password'
     | '/services'
     | '/admin'
     | '/admin/collections'
     | '/admin/contenus'
     | '/admin/pieces'
+    | '/api/public/couture-image'
     | '/api/public/style-advice'
   id:
     | '__root__'
@@ -209,11 +231,13 @@ export interface FileRouteTypes {
     | '/galerie'
     | '/mentions-legales'
     | '/rendez-vous'
+    | '/reset-password'
     | '/services'
     | '/_authenticated/admin'
     | '/_authenticated/admin/collections'
     | '/_authenticated/admin/contenus'
     | '/_authenticated/admin/pieces'
+    | '/api/public/couture-image'
     | '/api/public/style-advice'
   fileRoutesById: FileRoutesById
 }
@@ -228,7 +252,9 @@ export interface RootRouteChildren {
   GalerieRoute: typeof GalerieRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
   RendezVousRoute: typeof RendezVousRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   ServicesRoute: typeof ServicesRoute
+  ApiPublicCoutureImageRoute: typeof ApiPublicCoutureImageRoute
   ApiPublicStyleAdviceRoute: typeof ApiPublicStyleAdviceRoute
 }
 
@@ -304,6 +330,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RendezVousRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services': {
       id: '/services'
       path: '/services'
@@ -338,6 +371,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/pieces'
       preLoaderRoute: typeof AuthenticatedAdminPiecesRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/api/public/couture-image': {
+      id: '/api/public/couture-image'
+      path: '/api/public/couture-image'
+      fullPath: '/api/public/couture-image'
+      preLoaderRoute: typeof ApiPublicCoutureImageRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/api/public/style-advice': {
       id: '/api/public/style-advice'
@@ -386,7 +426,9 @@ const rootRouteChildren: RootRouteChildren = {
   GalerieRoute: GalerieRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
   RendezVousRoute: RendezVousRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   ServicesRoute: ServicesRoute,
+  ApiPublicCoutureImageRoute: ApiPublicCoutureImageRoute,
   ApiPublicStyleAdviceRoute: ApiPublicStyleAdviceRoute,
 }
 export const routeTree = rootRouteImport

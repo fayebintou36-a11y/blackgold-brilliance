@@ -1,3 +1,6 @@
+import { publicPages, contentSections } from '@/lib/admin-schema'
+import { useServerFn } from '@tanstack/react-start'
+import { pageHead } from '@/components/couture/site'
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import { Trash2, Plus } from 'lucide-react'
@@ -13,21 +16,25 @@ type PageContent = {
   updated_at: string
 }
 
-const empty = { page: '', section: '', content: '' }
+const empty: {page:typeof publicPages[number];section:typeof contentSections[number];content:string} = { page: 'accueil', section: 'titre', content: '' }
 
 export const Route = createFileRoute('/_authenticated/admin/contenus')({
-  head: () => ({ meta: [{ title: 'Contenus — Administration' }, { name: 'robots', content: 'noindex' }] }),
+  head: () => ({meta:[...pageHead('Contenus — Administration','Gestion sécurisée de la maison Omar Wally Fashion.').meta,{name:'robots',content:'noindex'}]}),
   component: AdminContenus,
 })
 
 function AdminContenus() {
+  const listPageContentsFn = useServerFn(listPageContents)
+  const savePageContentFn = useServerFn(savePageContent)
+  const deletePageContentFn = useServerFn(deletePageContent)
+
   const [rows, setRows] = useState<PageContent[]>([])
   const [form, setForm] = useState<typeof empty>(empty)
   const [status, setStatus] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
 
   function refresh() {
-    listPageContents().then(setRows).catch((e) => setStatus(e.message))
+    listPageContentsFn().then(setRows).catch((e) => setStatus(e.message))
   }
   useEffect(refresh, [])
 
@@ -36,7 +43,7 @@ function AdminContenus() {
     setBusy(true)
     setStatus(null)
     try {
-      await savePageContent({ data: form })
+      await savePageContentFn({ data: form })
       setStatus('Contenu enregistré.')
       refresh()
     } catch (err) {
@@ -49,7 +56,7 @@ function AdminContenus() {
   async function onDelete(id: string) {
     if (!window.confirm('Supprimer définitivement ce contenu ?')) return
     try {
-      await deletePageContent({ data: { id } })
+      await deletePageContentFn({ data: { id } })
       refresh()
     } catch (err) {
       setStatus(err instanceof Error ? err.message : 'Erreur lors de la suppression.')
@@ -60,8 +67,8 @@ function AdminContenus() {
     <AdminShell title="Contenus des pages">
       <form className="admin-form" onSubmit={onSubmit}>
         <h2>Modifier un contenu</h2>
-        <AdminField label="Page"><input required placeholder="accueil, a-propos, services…" value={form.page} onChange={(e) => setForm({ ...form, page: e.target.value })} /></AdminField>
-        <AdminField label="Section"><input required placeholder="titre, introduction…" value={form.section} onChange={(e) => setForm({ ...form, section: e.target.value })} /></AdminField>
+        <AdminField label="Page"><select value={form.page} onChange={e=>{const page=publicPages.find(p=>p===e.target.value);if(page)setForm({...form,page})}}>{publicPages.map(p=><option key={p} value={p}>{p}</option>)}</select></AdminField>
+        <AdminField label="Section"><select value={form.section} onChange={e=>{const section=contentSections.find(s=>s===e.target.value);if(section)setForm({...form,section})}}>{contentSections.map(s=><option key={s} value={s}>{s}</option>)}</select></AdminField>
         <AdminField label="Contenu"><textarea rows={6} value={form.content} onChange={(e) => setForm({ ...form, content: e.target.value })} /></AdminField>
         <div className="admin-form-actions">
           <Button variant="couture" type="submit" disabled={busy}><Plus size={14} /> ENREGISTRER</Button>
@@ -78,8 +85,8 @@ function AdminContenus() {
               <td>{r.section}</td>
               <td className="admin-excerpt">{r.content.slice(0, 80)}{r.content.length > 80 ? '…' : ''}</td>
               <td className="admin-row-actions">
-                <button className="text-link" onClick={() => setForm({ page: r.page, section: r.section, content: r.content })}>MODIFIER</button>
-                <button aria-label={`Supprimer ${r.page}/${r.section}`} onClick={() => onDelete(r.id)}><Trash2 size={15} /></button>
+                <Button variant="ghost" className="text-link" onClick={() => setForm({ page: publicPages.find(p=>p===r.page)??"accueil", section: contentSections.find(s=>s===r.section)??"titre", content: r.content })}>MODIFIER</Button>
+                <Button variant="ghost" size="icon" aria-label={`Supprimer ${r.page}/${r.section}`} onClick={() => onDelete(r.id)}><Trash2 size={15} /></Button>
               </td>
             </tr>
           ))}

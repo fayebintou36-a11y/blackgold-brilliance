@@ -1,18 +1,19 @@
 import { createServerFn } from '@tanstack/react-start'
 import { z } from 'zod'
 import { requireSupabaseAuth } from '@/integrations/supabase/auth-middleware'
+import { collectionInput, pieceInput, pageContentInput, assertAdminRoles } from './admin-schema'
+import type { SupabaseClient } from '@supabase/supabase-js'
+import type { Database } from '@/integrations/supabase/types'
 
-type AuthedContext = { supabase: any; userId: string }
+type AuthedContext = { supabase: SupabaseClient<Database>; userId: string }
 
-async function requireAdmin(supabase: any, userId: string) {
+async function requireAdmin(supabase: SupabaseClient<Database>, userId: string) {
   const { data, error } = await supabase
     .from('user_roles')
     .select('role')
     .eq('user_id', userId)
   if (error) throw new Error(error.message)
-  if (!(data ?? []).some((r: { role: string }) => r.role === 'admin')) {
-    throw new Error('Accès réservé aux administrateurs')
-  }
+  assertAdminRoles((data ?? []).map(r => r.role))
 }
 
 export const getMyRoles = createServerFn({ method: 'GET' })
@@ -27,29 +28,11 @@ export const getMyRoles = createServerFn({ method: 'GET' })
     return (data ?? []).map((r: { role: string }) => r.role)
   })
 
-const collectionInput = z.object({
-  id: z.string().uuid().optional(),
-  name: z.string().min(2).max(120),
-  category: z.string().max(120).default(''),
-  description: z.string().max(2000).default(''),
-  image_url: z.string().max(1000).default(''),
-  sort_order: z.number().int().min(0).max(9999).default(0),
-})
-
-const pieceInput = collectionInput.extend({
-  collection_id: z.string().uuid().nullable().default(null),
-})
-
-const pageContentInput = z.object({
-  page: z.string().min(1).max(80),
-  section: z.string().min(1).max(80),
-  content: z.string().max(20000).default(''),
-})
-
 export const listCollections = createServerFn({ method: 'GET' })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
-    const { supabase } = context as AuthedContext
+    const { supabase, userId } = context as AuthedContext
+    await requireAdmin(supabase, userId)
     const { data, error } = await supabase
       .from('collections')
       .select('*')
@@ -88,7 +71,8 @@ export const deleteCollection = createServerFn({ method: 'POST' })
 export const listPieces = createServerFn({ method: 'GET' })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
-    const { supabase } = context as AuthedContext
+    const { supabase, userId } = context as AuthedContext
+    await requireAdmin(supabase, userId)
     const { data, error } = await supabase
       .from('pieces')
       .select('*, collections(name)')
@@ -127,7 +111,8 @@ export const deletePiece = createServerFn({ method: 'POST' })
 export const listPageContents = createServerFn({ method: 'GET' })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
-    const { supabase } = context as AuthedContext
+    const { supabase, userId } = context as AuthedContext
+    await requireAdmin(supabase, userId)
     const { data, error } = await supabase
       .from('page_contents')
       .select('*')
