@@ -25,6 +25,7 @@ import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedAdminCollectionsRouteImport } from './routes/_authenticated/admin.collections'
 import { Route as AuthenticatedAdminContenusRouteImport } from './routes/_authenticated/admin.contenus'
 import { Route as AuthenticatedAdminPiecesRouteImport } from './routes/_authenticated/admin.pieces'
+import { Route as ApiPublicCoutureImageRouteImport } from './routes/api/public/couture-image'
 import { Route as ApiPublicStyleAdviceRouteImport } from './routes/api/public/style-advice'
 
 const IndexRoute = IndexRouteImport.update({
@@ -109,6 +110,11 @@ const AuthenticatedAdminPiecesRoute =
     path: '/pieces',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
+const ApiPublicCoutureImageRoute = ApiPublicCoutureImageRouteImport.update({
+  id: '/api/public/couture-image',
+  path: '/api/public/couture-image',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicStyleAdviceRoute = ApiPublicStyleAdviceRouteImport.update({
   id: '/api/public/style-advice',
   path: '/api/public/style-advice',
@@ -131,6 +137,7 @@ export interface FileRoutesByFullPath {
   '/admin/collections': typeof AuthenticatedAdminCollectionsRoute
   '/admin/contenus': typeof AuthenticatedAdminContenusRoute
   '/admin/pieces': typeof AuthenticatedAdminPiecesRoute
+  '/api/public/couture-image': typeof ApiPublicCoutureImageRoute
   '/api/public/style-advice': typeof ApiPublicStyleAdviceRoute
 }
 export interface FileRoutesByTo {
@@ -149,6 +156,7 @@ export interface FileRoutesByTo {
   '/admin/collections': typeof AuthenticatedAdminCollectionsRoute
   '/admin/contenus': typeof AuthenticatedAdminContenusRoute
   '/admin/pieces': typeof AuthenticatedAdminPiecesRoute
+  '/api/public/couture-image': typeof ApiPublicCoutureImageRoute
   '/api/public/style-advice': typeof ApiPublicStyleAdviceRoute
 }
 export interface FileRoutesById {
@@ -169,6 +177,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/collections': typeof AuthenticatedAdminCollectionsRoute
   '/_authenticated/admin/contenus': typeof AuthenticatedAdminContenusRoute
   '/_authenticated/admin/pieces': typeof AuthenticatedAdminPiecesRoute
+  '/api/public/couture-image': typeof ApiPublicCoutureImageRoute
   '/api/public/style-advice': typeof ApiPublicStyleAdviceRoute
 }
 export interface FileRouteTypes {
@@ -189,6 +198,7 @@ export interface FileRouteTypes {
     | '/admin/collections'
     | '/admin/contenus'
     | '/admin/pieces'
+    | '/api/public/couture-image'
     | '/api/public/style-advice'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -207,6 +217,7 @@ export interface FileRouteTypes {
     | '/admin/collections'
     | '/admin/contenus'
     | '/admin/pieces'
+    | '/api/public/couture-image'
     | '/api/public/style-advice'
   id:
     | '__root__'
@@ -226,6 +237,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/collections'
     | '/_authenticated/admin/contenus'
     | '/_authenticated/admin/pieces'
+    | '/api/public/couture-image'
     | '/api/public/style-advice'
   fileRoutesById: FileRoutesById
 }
@@ -242,6 +254,7 @@ export interface RootRouteChildren {
   RendezVousRoute: typeof RendezVousRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   ServicesRoute: typeof ServicesRoute
+  ApiPublicCoutureImageRoute: typeof ApiPublicCoutureImageRoute
   ApiPublicStyleAdviceRoute: typeof ApiPublicStyleAdviceRoute
 }
 
@@ -359,6 +372,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminPiecesRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/api/public/couture-image': {
+      id: '/api/public/couture-image'
+      path: '/api/public/couture-image'
+      fullPath: '/api/public/couture-image'
+      preLoaderRoute: typeof ApiPublicCoutureImageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/style-advice': {
       id: '/api/public/style-advice'
       path: '/api/public/style-advice'
@@ -408,6 +428,7 @@ const rootRouteChildren: RootRouteChildren = {
   RendezVousRoute: RendezVousRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   ServicesRoute: ServicesRoute,
+  ApiPublicCoutureImageRoute: ApiPublicCoutureImageRoute,
   ApiPublicStyleAdviceRoute: ApiPublicStyleAdviceRoute,
 }
 export const routeTree = rootRouteImport
