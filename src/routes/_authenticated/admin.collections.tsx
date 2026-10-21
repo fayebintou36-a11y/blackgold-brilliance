@@ -1,3 +1,6 @@
+import { AdminImage } from '@/components/couture/admin-image'
+import { useServerFn } from '@tanstack/react-start'
+import { pageHead } from '@/components/couture/site'
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import { Pencil, Trash2, Plus } from 'lucide-react'
@@ -17,18 +20,22 @@ type Collection = {
 const empty = { name: '', category: '', description: '', image_url: '', sort_order: 0 }
 
 export const Route = createFileRoute('/_authenticated/admin/collections')({
-  head: () => ({ meta: [{ title: 'Collections — Administration' }, { name: 'robots', content: 'noindex' }] }),
+  head: () => ({meta:[...pageHead('Collections — Administration','Gestion sécurisée de la maison Omar Wally Fashion.').meta,{name:'robots',content:'noindex'}]}),
   component: AdminCollections,
 })
 
 function AdminCollections() {
+  const listCollectionsFn = useServerFn(listCollections)
+  const saveCollectionFn = useServerFn(saveCollection)
+  const deleteCollectionFn = useServerFn(deleteCollection)
+
   const [rows, setRows] = useState<Collection[]>([])
   const [form, setForm] = useState<typeof empty & { id?: string }>(empty)
   const [status, setStatus] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
 
   function refresh() {
-    listCollections().then(setRows).catch((e) => setStatus(e.message))
+    listCollectionsFn().then(setRows).catch((e) => setStatus(e.message))
   }
   useEffect(refresh, [])
 
@@ -37,7 +44,7 @@ function AdminCollections() {
     setBusy(true)
     setStatus(null)
     try {
-      await saveCollection({ data: form })
+      await saveCollectionFn({ data: form })
       setForm(empty)
       setStatus('Collection enregistrée.')
       refresh()
@@ -51,7 +58,7 @@ function AdminCollections() {
   async function onDelete(id: string) {
     if (!window.confirm('Supprimer définitivement cette collection ?')) return
     try {
-      await deleteCollection({ data: { id } })
+      await deleteCollectionFn({ data: { id } })
       refresh()
     } catch (err) {
       setStatus(err instanceof Error ? err.message : 'Erreur lors de la suppression.')
@@ -65,7 +72,7 @@ function AdminCollections() {
         <AdminField label="Nom"><input required minLength={2} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} /></AdminField>
         <AdminField label="Catégorie"><input value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} /></AdminField>
         <AdminField label="Description"><textarea rows={3} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} /></AdminField>
-        <AdminField label="URL de l’image"><input type="url" value={form.image_url} onChange={(e) => setForm({ ...form, image_url: e.target.value })} placeholder="https://…" /></AdminField>
+        <AdminImage value={form.image_url} onChange={image_url=>setForm({...form,image_url})}/>
         <AdminField label="Ordre d’affichage"><input type="number" min={0} value={form.sort_order} onChange={(e) => setForm({ ...form, sort_order: Number(e.target.value) })} /></AdminField>
         <div className="admin-form-actions">
           <Button variant="couture" type="submit" disabled={busy}>{form.id ? 'ENREGISTRER' : <><Plus size={14} /> AJOUTER</>}</Button>
@@ -83,8 +90,8 @@ function AdminCollections() {
               <td>{c.category}</td>
               <td>{c.sort_order}</td>
               <td className="admin-row-actions">
-                <button aria-label={`Modifier ${c.name}`} onClick={() => setForm({ id: c.id, name: c.name, category: c.category, description: c.description, image_url: c.image_url, sort_order: c.sort_order })}><Pencil size={15} /></button>
-                <button aria-label={`Supprimer ${c.name}`} onClick={() => onDelete(c.id)}><Trash2 size={15} /></button>
+                <Button variant="ghost" size="icon" aria-label={`Modifier ${c.name}`} onClick={() => setForm({ id: c.id, name: c.name, category: c.category, description: c.description, image_url: c.image_url, sort_order: c.sort_order })}><Pencil size={15} /></Button>
+                <Button variant="ghost" size="icon" aria-label={`Supprimer ${c.name}`} onClick={() => onDelete(c.id)}><Trash2 size={15} /></Button>
               </td>
             </tr>
           ))}

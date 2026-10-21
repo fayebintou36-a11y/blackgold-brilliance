@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate, Link } from '@tanstack/react-router'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { supabase } from '@/integrations/supabase/client'
 import { Button } from '@/components/ui/button'
 import { pageHead } from '@/components/couture/site'
@@ -12,6 +12,18 @@ export const Route = createFileRoute('/auth')({
 
 function AuthPage() {
   const navigate = useNavigate()
+  const [notice,setNotice]=useState('')
+  useEffect(()=>{
+    const type=new URLSearchParams(window.location.hash.slice(1)).get('type')
+    if(type==='invite'||type==='recovery'){void navigate({to:'/reset-password'});return}
+    void supabase.auth.getUser().then(({data})=>{if(data.user)void navigate({to:'/admin'})})
+  },[navigate])
+  async function resetPassword(){
+    setLoading(true)
+    const {error}=await supabase.auth.resetPasswordForEmail(email,{redirectTo:`${window.location.origin}/reset-password`})
+    setLoading(false)
+    setNotice(error?'Le lien ne peut pas être envoyé pour le moment. Réessayez plus tard.':'Si ce compte existe, un lien a été envoyé par e-mail.')
+  }
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
@@ -48,6 +60,8 @@ function AuthPage() {
         <Button variant="couture" type="submit" disabled={loading}>
           {loading ? 'CONNEXION…' : 'SE CONNECTER'}
         </Button>
+        <Button variant="ghost" type="button" disabled={!email||loading} onClick={resetPassword}>Mot de passe oublié ?</Button>
+        {notice&&<p role="status">{notice}</p>}
         <Link to="/" className="auth-back">← Retour au site</Link>
       </form>
     </div>

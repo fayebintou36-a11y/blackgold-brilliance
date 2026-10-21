@@ -19,6 +19,7 @@ import { Route as CreationsRouteImport } from './routes/creations'
 import { Route as GalerieRouteImport } from './routes/galerie'
 import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as RendezVousRouteImport } from './routes/rendez-vous'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAdminCollectionsRouteImport } from './routes/_authenticated/admin.collections'
@@ -75,6 +76,11 @@ const RendezVousRoute = RendezVousRouteImport.update({
   path: '/rendez-vous',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
@@ -119,6 +125,7 @@ export interface FileRoutesByFullPath {
   '/galerie': typeof GalerieRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/rendez-vous': typeof RendezVousRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/services': typeof ServicesRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/admin/collections': typeof AuthenticatedAdminCollectionsRoute
@@ -136,6 +143,7 @@ export interface FileRoutesByTo {
   '/galerie': typeof GalerieRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/rendez-vous': typeof RendezVousRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/services': typeof ServicesRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/admin/collections': typeof AuthenticatedAdminCollectionsRoute
@@ -155,6 +163,7 @@ export interface FileRoutesById {
   '/galerie': typeof GalerieRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/rendez-vous': typeof RendezVousRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/services': typeof ServicesRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/_authenticated/admin/collections': typeof AuthenticatedAdminCollectionsRoute
@@ -174,6 +183,7 @@ export interface FileRouteTypes {
     | '/galerie'
     | '/mentions-legales'
     | '/rendez-vous'
+    | '/reset-password'
     | '/services'
     | '/admin'
     | '/admin/collections'
@@ -191,6 +201,7 @@ export interface FileRouteTypes {
     | '/galerie'
     | '/mentions-legales'
     | '/rendez-vous'
+    | '/reset-password'
     | '/services'
     | '/admin'
     | '/admin/collections'
@@ -209,6 +220,7 @@ export interface FileRouteTypes {
     | '/galerie'
     | '/mentions-legales'
     | '/rendez-vous'
+    | '/reset-password'
     | '/services'
     | '/_authenticated/admin'
     | '/_authenticated/admin/collections'
@@ -228,6 +240,7 @@ export interface RootRouteChildren {
   GalerieRoute: typeof GalerieRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
   RendezVousRoute: typeof RendezVousRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   ServicesRoute: typeof ServicesRoute
   ApiPublicStyleAdviceRoute: typeof ApiPublicStyleAdviceRoute
 }
@@ -302,6 +315,13 @@ declare module '@tanstack/react-router' {
       path: '/rendez-vous'
       fullPath: '/rendez-vous'
       preLoaderRoute: typeof RendezVousRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services': {
@@ -386,6 +406,7 @@ const rootRouteChildren: RootRouteChildren = {
   GalerieRoute: GalerieRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
   RendezVousRoute: RendezVousRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   ServicesRoute: ServicesRoute,
   ApiPublicStyleAdviceRoute: ApiPublicStyleAdviceRoute,
 }

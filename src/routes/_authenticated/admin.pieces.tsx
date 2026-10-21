@@ -1,3 +1,6 @@
+import { AdminImage } from '@/components/couture/admin-image'
+import { useServerFn } from '@tanstack/react-start'
+import { pageHead } from '@/components/couture/site'
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import { Pencil, Trash2, Plus } from 'lucide-react'
@@ -19,11 +22,16 @@ type Piece = {
 const empty = { collection_id: null as string | null, name: '', category: '', description: '', image_url: '', sort_order: 0 }
 
 export const Route = createFileRoute('/_authenticated/admin/pieces')({
-  head: () => ({ meta: [{ title: 'Pièces — Administration' }, { name: 'robots', content: 'noindex' }] }),
+  head: () => ({meta:[...pageHead('Pièces — Administration','Gestion sécurisée de la maison Omar Wally Fashion.').meta,{name:'robots',content:'noindex'}]}),
   component: AdminPieces,
 })
 
 function AdminPieces() {
+  const listPiecesFn = useServerFn(listPieces)
+  const savePieceFn = useServerFn(savePiece)
+  const deletePieceFn = useServerFn(deletePiece)
+  const listCollectionsFn = useServerFn(listCollections)
+
   const [rows, setRows] = useState<Piece[]>([])
   const [collections, setCollections] = useState<{ id: string; name: string }[]>([])
   const [form, setForm] = useState<typeof empty & { id?: string }>(empty)
@@ -31,8 +39,8 @@ function AdminPieces() {
   const [busy, setBusy] = useState(false)
 
   function refresh() {
-    listPieces().then(setRows).catch((e) => setStatus(e.message))
-    listCollections().then(setCollections).catch(() => {})
+    listPiecesFn().then(setRows).catch((e) => setStatus(e.message))
+    listCollectionsFn().then(setCollections).catch(() => {})
   }
   useEffect(refresh, [])
 
@@ -41,7 +49,7 @@ function AdminPieces() {
     setBusy(true)
     setStatus(null)
     try {
-      await savePiece({ data: form })
+      await savePieceFn({ data: form })
       setForm(empty)
       setStatus('Pièce enregistrée.')
       refresh()
@@ -55,7 +63,7 @@ function AdminPieces() {
   async function onDelete(id: string) {
     if (!window.confirm('Supprimer définitivement cette pièce ?')) return
     try {
-      await deletePiece({ data: { id } })
+      await deletePieceFn({ data: { id } })
       refresh()
     } catch (err) {
       setStatus(err instanceof Error ? err.message : 'Erreur lors de la suppression.')
@@ -75,7 +83,7 @@ function AdminPieces() {
         <AdminField label="Nom"><input required minLength={2} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} /></AdminField>
         <AdminField label="Catégorie"><input value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} /></AdminField>
         <AdminField label="Description"><textarea rows={3} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} /></AdminField>
-        <AdminField label="URL de l’image"><input type="url" value={form.image_url} onChange={(e) => setForm({ ...form, image_url: e.target.value })} placeholder="https://…" /></AdminField>
+        <AdminImage value={form.image_url} onChange={image_url=>setForm({...form,image_url})}/>
         <AdminField label="Ordre d’affichage"><input type="number" min={0} value={form.sort_order} onChange={(e) => setForm({ ...form, sort_order: Number(e.target.value) })} /></AdminField>
         <div className="admin-form-actions">
           <Button variant="couture" type="submit" disabled={busy}>{form.id ? 'ENREGISTRER' : <><Plus size={14} /> AJOUTER</>}</Button>
@@ -93,8 +101,8 @@ function AdminPieces() {
               <td>{p.collections?.name ?? '—'}</td>
               <td>{p.category}</td>
               <td className="admin-row-actions">
-                <button aria-label={`Modifier ${p.name}`} onClick={() => setForm({ id: p.id, collection_id: p.collection_id, name: p.name, category: p.category, description: p.description, image_url: p.image_url, sort_order: p.sort_order })}><Pencil size={15} /></button>
-                <button aria-label={`Supprimer ${p.name}`} onClick={() => onDelete(p.id)}><Trash2 size={15} /></button>
+                <Button variant="ghost" size="icon" aria-label={`Modifier ${p.name}`} onClick={() => setForm({ id: p.id, collection_id: p.collection_id, name: p.name, category: p.category, description: p.description, image_url: p.image_url, sort_order: p.sort_order })}><Pencil size={15} /></Button>
+                <Button variant="ghost" size="icon" aria-label={`Supprimer ${p.name}`} onClick={() => onDelete(p.id)}><Trash2 size={15} /></Button>
               </td>
             </tr>
           ))}
