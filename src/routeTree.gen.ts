@@ -22,6 +22,7 @@ import { Route as RendezVousRouteImport } from './routes/rendez-vous'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
 import { Route as AuthenticatedAdminCollectionsRouteImport } from './routes/_authenticated/admin.collections'
 import { Route as AuthenticatedAdminContenusRouteImport } from './routes/_authenticated/admin.contenus'
 import { Route as AuthenticatedAdminPiecesRouteImport } from './routes/_authenticated/admin.pieces'
@@ -92,6 +93,11 @@ const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedAdminRoute,
+} as any)
 const AuthenticatedAdminCollectionsRoute =
   AuthenticatedAdminCollectionsRouteImport.update({
     id: '/collections',
@@ -139,6 +145,7 @@ export interface FileRoutesByFullPath {
   '/admin/pieces': typeof AuthenticatedAdminPiecesRoute
   '/api/public/couture-image': typeof ApiPublicCoutureImageRoute
   '/api/public/style-advice': typeof ApiPublicStyleAdviceRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -152,12 +159,12 @@ export interface FileRoutesByTo {
   '/rendez-vous': typeof RendezVousRoute
   '/reset-password': typeof ResetPasswordRoute
   '/services': typeof ServicesRoute
-  '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/admin/collections': typeof AuthenticatedAdminCollectionsRoute
   '/admin/contenus': typeof AuthenticatedAdminContenusRoute
   '/admin/pieces': typeof AuthenticatedAdminPiecesRoute
   '/api/public/couture-image': typeof ApiPublicCoutureImageRoute
   '/api/public/style-advice': typeof ApiPublicStyleAdviceRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -179,6 +186,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/pieces': typeof AuthenticatedAdminPiecesRoute
   '/api/public/couture-image': typeof ApiPublicCoutureImageRoute
   '/api/public/style-advice': typeof ApiPublicStyleAdviceRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -200,6 +208,7 @@ export interface FileRouteTypes {
     | '/admin/pieces'
     | '/api/public/couture-image'
     | '/api/public/style-advice'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -213,12 +222,12 @@ export interface FileRouteTypes {
     | '/rendez-vous'
     | '/reset-password'
     | '/services'
-    | '/admin'
     | '/admin/collections'
     | '/admin/contenus'
     | '/admin/pieces'
     | '/api/public/couture-image'
     | '/api/public/style-advice'
+    | '/admin'
   id:
     | '__root__'
     | '/'
@@ -239,6 +248,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/pieces'
     | '/api/public/couture-image'
     | '/api/public/style-advice'
+    | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -351,6 +361,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
     '/_authenticated/admin/collections': {
       id: '/_authenticated/admin/collections'
       path: '/collections'
@@ -393,12 +410,14 @@ interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminCollectionsRoute: typeof AuthenticatedAdminCollectionsRoute
   AuthenticatedAdminContenusRoute: typeof AuthenticatedAdminContenusRoute
   AuthenticatedAdminPiecesRoute: typeof AuthenticatedAdminPiecesRoute
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
 }
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
   AuthenticatedAdminCollectionsRoute: AuthenticatedAdminCollectionsRoute,
   AuthenticatedAdminContenusRoute: AuthenticatedAdminContenusRoute,
   AuthenticatedAdminPiecesRoute: AuthenticatedAdminPiecesRoute,
+  AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
 }
 
 const AuthenticatedAdminRouteWithChildren =
