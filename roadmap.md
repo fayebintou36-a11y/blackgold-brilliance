@@ -2,7 +2,6 @@
 - [x] Stage 1: Public pages, supplied logo, premium visual identity, filterable gallery, contact and telephone appointment entry.
 - [x] Verify navigation, gallery and mobile layout.
 
-## Secure administration
 ## Homepage enrichment
 - [x] Replace the three selected collection photos with supplied images and verify refined presentation, scroll reveals and gallery readback.
 - [x] Add integrated AI Gateway outfit advice for occasion, preferences and budget; verify a real recommendation.
@@ -11,9 +10,9 @@
 - [x] Verify homepage navigation, animations, reduced-motion support and narrow-screen layout.
 
 ## Secure administration
-- [ ] Complete email/password access and admin styling using Lovable Cloud.
-- [ ] Connect collection, piece and page-content management to public pages.
-- [ ] Verify validation, denied anonymous writes and public page rendering.
-- [ ] Verify authenticated CRUD. Blocked: no existing account; first administrator needs the owner's confirmed email.
+- [x] Complete email/password access and admin styling using Lovable Cloud.
+- [x] Connect collection, piece and page-content management to public pages.
+- [x] Verify validation, denied anonymous writes and public page rendering.
+- [x] Verify authenticated CRUD end-to-end (collections, photo upload, page contents, sign-out, route protection).
 
 Appointment management remains a later stage.
