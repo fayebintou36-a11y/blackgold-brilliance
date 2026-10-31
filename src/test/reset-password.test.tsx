@@ -36,7 +36,9 @@ describe('Password session restoration',()=>{
   auth.getSession.mockResolvedValue({data:{session:null},error:null})
   render(<ResetPassword />)
   await screen.findByText('Connexion administrateur')
-  act(()=>auth.onAuthStateChange.mock.calls[0][0]('SIGNED_IN',session))
+  const callback=auth.onAuthStateChange.mock.calls[0]?.[0]
+  if(!callback)throw new Error('Auth listener was not registered')
+  act(()=>callback('SIGNED_IN',session))
   expect(screen.getByLabelText('Mot de passe actuel')).toBeEnabled()
  })
  it('offers retry when restoration stalls',async()=>{
