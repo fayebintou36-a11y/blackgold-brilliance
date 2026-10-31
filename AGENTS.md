@@ -13,3 +13,4 @@
 - Collection photos and illustration status share one data source across homepage, creations and gallery; scroll reveals progressively enhance visible SSR content and respect reduced motion.
 - Stage-one photographs are illustrative assets; appointment requests use the supplied telephone until persistent submission is configured, avoiding simulated saves.
 - Outfit advice uses a same-origin validated streaming server endpoint with server-only AI Gateway helpers; a service-only circuit breaker persists access blocks without storing visitor descriptions.
+- Password recovery restores browser sessions through getSession and a synchronous auth-state listener with loading, timeout and retry states, so refresh and late session restoration cannot leave the form inaccessible.
