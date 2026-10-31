@@ -42,6 +42,15 @@ export function ResetPassword(){
   })
   return()=>{active=false;clearTimeout(timeout);data.subscription.unsubscribe()}
  },[attempt])
+ useEffect(()=>{
+  if(status!=='ready')return
+  let active=true
+  // Refresh account metadata without blocking editable fields on a network read.
+  void supabase.auth.getUser().then(({data})=>{
+   if(active&&data.user)setForced(Boolean(data.user.user_metadata?.['must_change_password']))
+  }).catch(()=>{})
+  return()=>{active=false}
+ },[status,attempt])
  async function submit(e:React.FormEvent){
   e.preventDefault()
   if(busy||status!=='ready')return

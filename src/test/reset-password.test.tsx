@@ -2,7 +2,7 @@ import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-libra
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { ResetPassword } from '@/routes/reset-password'
 
-const auth=vi.hoisted(()=>({getSession:vi.fn(),updateUser:vi.fn(),onAuthStateChange:vi.fn(),navigate:vi.fn()}))
+const auth=vi.hoisted(()=>({getSession:vi.fn(),getUser:vi.fn(),updateUser:vi.fn(),onAuthStateChange:vi.fn(),navigate:vi.fn()}))
 vi.mock('@/integrations/supabase/client',()=>({supabase:{auth}}))
 vi.mock('@tanstack/react-router',()=>({createFileRoute:()=> (options:unknown)=>options,useNavigate:()=>auth.navigate,Link:({children}: {children:React.ReactNode})=><a>{children}</a>}))
 vi.mock('@/components/couture/site',()=>({pageHead:()=>({})}))
@@ -11,6 +11,7 @@ const session={user:{user_metadata:{must_change_password:true}}}
 beforeEach(()=>{
  vi.clearAllMocks()
  auth.getSession.mockResolvedValue({data:{session},error:null})
+ auth.getUser.mockResolvedValue({data:{user:session.user},error:null})
  auth.onAuthStateChange.mockReturnValue({data:{subscription:{unsubscribe:vi.fn()}}})
 })
 afterEach(()=>{cleanup();vi.useRealTimers()})
