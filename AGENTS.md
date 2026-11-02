@@ -14,3 +14,4 @@
 - Stage-one photographs are illustrative assets; appointment requests use the supplied telephone until persistent submission is configured, avoiding simulated saves.
 - Outfit advice uses a same-origin validated streaming server endpoint with server-only AI Gateway helpers; a service-only circuit breaker persists access blocks without storing visitor descriptions.
 - Password recovery restores browser sessions through getSession and a synchronous auth-state listener with loading, timeout and retry states, so refresh and late session restoration cannot leave the form inaccessible.
+- Homepage photo rotation lives in a dedicated presentation component with manual selection, pause and reduced-motion support, keeping the original uploaded photographs intact.
