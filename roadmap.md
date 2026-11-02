@@ -3,7 +3,7 @@
 - [x] Verify navigation, gallery and mobile layout.
 
 ## Homepage enrichment
-- [ ] Replace the homepage image with the four supplied scene photographs; verify transitions, controls and mobile framing.
+- [x] Replace the homepage image with the four supplied scene photographs; verify transitions, controls and mobile framing.
 - [x] Replace the three selected collection photos with supplied images and verify refined presentation, scroll reveals and gallery readback.
 - [x] Add integrated AI Gateway outfit advice for occasion, preferences and budget; verify a real recommendation.
 - [x] Integrate both new Senegalese couture visuals on mobile and large screens.
