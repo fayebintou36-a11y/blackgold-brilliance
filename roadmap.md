@@ -3,6 +3,7 @@
 - [x] Verify navigation, gallery and mobile layout.
 
 ## Homepage enrichment
+- [x] Add an elegant About photo caption and verify full photo framing on phones for About and all homepage slides.
 - [x] Replace the homepage image with the four supplied scene photographs; verify transitions, controls and mobile framing.
 - [x] Replace the three selected collection photos with supplied images and verify refined presentation, scroll reveals and gallery readback.
 - [x] Add integrated AI Gateway outfit advice for occasion, preferences and budget; verify a real recommendation.
