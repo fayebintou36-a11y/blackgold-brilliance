@@ -594,3 +594,4 @@ h1,h2,h3 { font-family: var(--font-heading); font-weight: 400; letter-spacing: 0
  .scene-hero .hero-couture .hero-actions > * { width:100%; justify-content:center; height:50px; font-size:10px; }
 }
 @media (max-width:380px) { .hero-couture .hero-pillars li { padding:0 9px; letter-spacing:.1em; font-size:9.5px; } .hero-couture .eyebrow { letter-spacing:.12em; } }
+@media (max-width:760px) { .hero-couture .hero-pillars li:first-child { padding-left:0; } }
