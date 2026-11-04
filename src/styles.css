@@ -569,3 +569,15 @@ h1,h2,h3 { font-family: var(--font-heading); font-weight: 400; letter-spacing: 0
   .founder-badge { width: 104px; height: 104px; top: -20px; right: 4%; }
   .founder-badge strong { font-size: 30px; }
 }
+.hero-couture .eyebrow { letter-spacing:.24em; }
+.hero-couture h1 { letter-spacing:-.01em; line-height:.98; }
+.hero-couture h1 em { display:inline-block; padding-left:.6em; }
+.hero-rule { display:flex; align-items:center; gap:12px; max-width:240px; margin:22px 0 18px; color:var(--primary); }
+.hero-rule span { flex:1; height:1px; background:linear-gradient(90deg, transparent, var(--primary)); }
+.hero-rule span:last-child { background:linear-gradient(90deg, var(--primary), transparent); }
+.hero-couture .hero-tagline { font-family:var(--font-display, serif); font-style:italic; font-size:21px; letter-spacing:.01em; text-transform:none; color:var(--primary); margin-bottom:14px; }
+.hero-couture .hero-description { max-width:440px; font-size:13px; line-height:1.9; color:color-mix(in oklab, var(--foreground) 82%, transparent); }
+.hero-pillars { display:flex; flex-wrap:wrap; gap:0; margin:20px 0 4px; padding:0; list-style:none; }
+.hero-pillars li { font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted-foreground); padding:0 14px; border-left:1px solid color-mix(in oklab, var(--primary) 50%, transparent); }
+.hero-pillars li:first-child { padding-left:0; border-left:0; }
+@media (max-width:760px) { .hero-couture h1 em { padding-left:.4em; } .hero-couture .hero-tagline { font-size:18px; } .hero-rule { margin:14px 0 12px; } .hero-couture .hero-description { font-size:12px; } }
