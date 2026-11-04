@@ -309,6 +309,25 @@ h1,h2,h3 { font-family: var(--font-heading); font-weight: 400; letter-spacing: 0
 .home-photo-dot,.home-photo-pause { width:36px; height:36px; color:var(--ivory); border-radius:0; }
 .home-photo-dot span { width:6px; height:6px; background:var(--ivory); opacity:.5; transition:width .35s ease, opacity .35s ease; }
 .home-photo-dot[aria-pressed=true] span { width:22px; background:var(--primary); opacity:1; }
+.couture-frame { position:absolute; inset:28px 5% 28px 52%; pointer-events:none; z-index:1; }
+.couture-frame i { position:absolute; width:34px; height:34px; border-color:var(--primary); border-style:solid; border-width:0; opacity:.85; }
+.couture-frame i:nth-child(1){top:0;left:0;border-top-width:1px;border-left-width:1px}
+.couture-frame i:nth-child(2){top:0;right:0;border-top-width:1px;border-right-width:1px}
+.couture-frame i:nth-child(3){bottom:0;left:0;border-bottom-width:1px;border-left-width:1px}
+.couture-frame i:nth-child(4){bottom:0;right:0;border-bottom-width:1px;border-right-width:1px}
+.couture-seam { position:absolute; z-index:1; top:28px; bottom:28px; left:calc(52% - 18px); border-left:1px dashed color-mix(in oklab, var(--primary) 55%, transparent); pointer-events:none; }
+.couture-label { position:absolute; z-index:2; left:calc(52% + 22px); bottom:60px; display:flex; flex-direction:column; gap:8px; padding:14px 18px 16px; min-width:210px; background:color-mix(in oklab, var(--background) 72%, transparent); backdrop-filter:blur(6px); border-left:2px solid var(--primary); overflow:hidden; }
+.couture-label-number { font-family:var(--font-display, serif); font-size:30px; line-height:1; color:var(--primary); }
+.couture-label-number small { font-size:12px; color:var(--muted-foreground); letter-spacing:.1em; }
+.couture-label-text { display:flex; flex-direction:column; gap:3px; animation:couture-label-in .8s ease both; }
+.couture-label-text em { font-family:var(--font-display, serif); font-size:20px; color:var(--foreground); }
+.couture-label-text span { font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted-foreground); }
+.couture-progress { position:absolute; left:0; bottom:0; height:1px; width:100%; background:var(--primary); transform-origin:left; animation:couture-progress 6.5s linear both; }
+@keyframes couture-label-in { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+@keyframes couture-progress { from { transform:scaleX(0); } to { transform:scaleX(1); } }
+@media (prefers-reduced-motion: reduce) { .couture-label-text { animation:none; } }
+@media (max-width:1000px) { .couture-seam { display:none; } .couture-frame { inset:16px 4%; } .couture-label { left:auto; right:4%; top:auto; bottom:110px; } }
+@media (max-width:760px) { .couture-frame { inset:12px; } .couture-frame i { width:22px; height:22px; } .couture-label { left:12px; right:auto; top:auto; bottom:12px; min-width:0; padding:6px 10px 8px; gap:4px; } .couture-label-number { font-size:20px; } .couture-label-text em { font-size:15px; } .couture-label-text span { display:none; } .couture-label { max-width:150px; } }
 .home-photo-dot:hover,.home-photo-pause:hover { background:var(--secondary); }
 @media(max-width:760px) {
  .senegal-hero.scene-hero { height:auto; min-height:0; max-height:none; }
