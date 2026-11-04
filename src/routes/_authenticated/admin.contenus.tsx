@@ -81,9 +81,9 @@ function AdminContenus() {
         <tbody>
           {rows.map((r) => (
             <tr key={r.id}>
-              <td>{r.page}</td>
-              <td>{r.section}</td>
-              <td className="admin-excerpt">{r.content.slice(0, 80)}{r.content.length > 80 ? '…' : ''}</td>
+              <td data-label="Page">{r.page}</td>
+              <td data-label="Section">{r.section}</td>
+              <td data-label="Contenu" className="admin-excerpt">{r.content.slice(0, 80)}{r.content.length > 80 ? '…' : ''}</td>
               <td className="admin-row-actions">
                 <Button variant="ghost" className="text-link" onClick={() => setForm({ page: publicPages.find(p=>p===r.page)??"accueil", section: contentSections.find(s=>s===r.section)??"titre", content: r.content })}>MODIFIER</Button>
                 <Button variant="ghost" size="icon" aria-label={`Supprimer ${r.page}/${r.section}`} onClick={() => onDelete(r.id)}><Trash2 size={15} /></Button>
