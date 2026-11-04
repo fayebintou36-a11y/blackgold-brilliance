@@ -38,7 +38,7 @@ export function HomePhotos() {
       <span className="couture-seam" aria-hidden="true" />
       <div className="couture-label" aria-live="polite">
         <span className="couture-label-number">{String(active + 1).padStart(2, '0')}<small> / {String(photos.length).padStart(2, '0')}</small></span>
-        <span className="couture-label-text" key={active}><em>{photos[active].title}</em><span>{photos[active].detail}</span></span>
+        <span className="couture-label-text" key={active}><em>{photos[active]?.title}</em><span>{photos[active]?.detail}</span></span>
         {!reduced && !paused && <span className="couture-progress" key={`p${active}`} aria-hidden="true" />}
       </div>
     </div>
