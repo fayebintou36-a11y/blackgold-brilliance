@@ -97,9 +97,9 @@ function AdminPieces() {
         <tbody>
           {rows.map((p) => (
             <tr key={p.id}>
-              <td>{p.name}</td>
-              <td>{p.collections?.name ?? '—'}</td>
-              <td>{p.category}</td>
+              <td data-label="Nom">{p.name}</td>
+              <td data-label="Collection">{p.collections?.name ?? '—'}</td>
+              <td data-label="Catégorie">{p.category}</td>
               <td className="admin-row-actions">
                 <Button variant="ghost" size="icon" aria-label={`Modifier ${p.name}`} onClick={() => setForm({ id: p.id, collection_id: p.collection_id, name: p.name, category: p.category, description: p.description, image_url: p.image_url, sort_order: p.sort_order })}><Pencil size={15} /></Button>
                 <Button variant="ghost" size="icon" aria-label={`Supprimer ${p.name}`} onClick={() => onDelete(p.id)}><Trash2 size={15} /></Button>

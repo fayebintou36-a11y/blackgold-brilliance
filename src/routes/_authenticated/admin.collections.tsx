@@ -86,9 +86,9 @@ function AdminCollections() {
         <tbody>
           {rows.map((c) => (
             <tr key={c.id}>
-              <td>{c.name}</td>
-              <td>{c.category}</td>
-              <td>{c.sort_order}</td>
+              <td data-label="Nom">{c.name}</td>
+              <td data-label="Catégorie">{c.category}</td>
+              <td data-label="Ordre">{c.sort_order}</td>
               <td className="admin-row-actions">
                 <Button variant="ghost" size="icon" aria-label={`Modifier ${c.name}`} onClick={() => setForm({ id: c.id, name: c.name, category: c.category, description: c.description, image_url: c.image_url, sort_order: c.sort_order })}><Pencil size={15} /></Button>
                 <Button variant="ghost" size="icon" aria-label={`Supprimer ${c.name}`} onClick={() => onDelete(c.id)}><Trash2 size={15} /></Button>
