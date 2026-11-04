@@ -581,3 +581,17 @@ h1,h2,h3 { font-family: var(--font-heading); font-weight: 400; letter-spacing: 0
 .hero-pillars li { font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted-foreground); padding:0 14px; border-left:1px solid color-mix(in oklab, var(--primary) 50%, transparent); }
 .hero-pillars li:first-child { padding-left:0; border-left:0; }
 @media (max-width:760px) { .hero-couture h1 em { padding-left:.4em; } .hero-couture .hero-tagline { font-size:18px; } .hero-rule { margin:14px 0 12px; } .hero-couture .hero-description { font-size:12px; } }
+@media (max-width:760px) {
+ .senegal-hero.scene-hero .hero-content.hero-couture { padding:34px 6% 44px; }
+ .hero-couture .eyebrow { font-size:9px; letter-spacing:.18em; gap:10px; }
+ .senegal-hero.scene-hero .hero-couture h1 { font-size:clamp(42px, 13vw, 54px); margin:16px 0 4px; }
+ .hero-rule { max-width:200px; margin:16px 0 14px; }
+ .hero-couture .hero-tagline { font-size:19px; line-height:1.35; margin-bottom:14px; }
+ .scene-hero .hero-couture .hero-description { font-size:14px; line-height:1.75; max-width:none; }
+ .hero-pillars { margin:20px 0 6px; row-gap:8px; }
+ .hero-pillars li { font-size:10px; letter-spacing:.16em; padding:0 12px; }
+ .scene-hero .hero-couture .hero-actions { flex-direction:column; align-items:stretch; gap:12px; margin-top:26px; }
+ .scene-hero .hero-couture .hero-actions > * { width:100%; justify-content:center; height:50px; font-size:10px; }
+}
+@media (max-width:380px) { .hero-couture .hero-pillars li { padding:0 9px; letter-spacing:.1em; font-size:9.5px; } .hero-couture .eyebrow { letter-spacing:.12em; } }
+@media (max-width:760px) { .hero-couture .hero-pillars li:first-child { padding-left:0; } }
