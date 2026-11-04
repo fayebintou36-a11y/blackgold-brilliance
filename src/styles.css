@@ -363,7 +363,7 @@ h1,h2,h3 { font-family: var(--font-heading); font-weight: 400; letter-spacing: 0
 }
 @keyframes couture-reveal { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
 @media (prefers-reduced-motion:reduce) { *,*:before,*:after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }
-@media(max-width:1000px) { .site-header { grid-template-columns:100px 1fr auto; padding:0 4%; } .desktop-nav { gap:15px; } .hero-content h1 { font-size:64px; } .hero-content { padding-left:6%; } .about-grid { gap:35px; } .senegal-hero.scene-hero .scene-photo { object-position:center; } }
+@media(max-width:1000px) { .site-header { grid-template-columns:100px 1fr auto; padding:0 4%; } .desktop-nav { gap:15px; } .hero-content h1 { font-size:64px; } .hero-content { padding-left:6%; } .about-grid { gap:35px; } .senegal-hero.scene-hero .scene-photo { object-position:center; left:0; width:100%; } }
 @media(max-width:760px) {
  .site-header { height:80px; grid-template-columns:minmax(0,1fr) auto; } .brand-logo { height:65px; width:65px; } .desktop-nav,.header-appointment { display:none; } .mobile-toggle { display:inline-flex; }
  .home-hero { height:690px; min-height:0; } .hero-image { object-position:65% center; opacity:.63; } .hero-content { padding:160px 6% 50px; max-width:100%; } .hero-content h1 { font-size:58px; } .hero-tagline { font-size:9px; } .hero-description { max-width:310px; } .hero-actions { flex-wrap:wrap; gap:10px; } .couture-button { padding:0 17px; font-size:8px; } .hero-caption { font-size:7px; } .hero-bottom { left:6%; }
