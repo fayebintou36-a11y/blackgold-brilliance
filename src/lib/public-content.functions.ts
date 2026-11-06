@@ -17,7 +17,7 @@ export const getPublicContent = createServerFn({ method: 'GET' }).handler(async 
   })
   const [collections, pieces, contents] = await Promise.all([
     client.from('collections').select('id,name,category,description,image_url,sort_order').order('sort_order').order('created_at'),
-    client.from('pieces').select('id,collection_id,name,category,description,image_url,sort_order').order('sort_order').order('created_at'),
+    client.from('pieces').select('id,collection_id,name,category,description,image_url,sort_order,section,featured').order('section').order('sort_order').order('created_at'),
     client.from('page_contents').select('page,section,content'),
   ])
   if (collections.error || pieces.error || contents.error) throw new Error('Le contenu du site est momentanément indisponible.')
