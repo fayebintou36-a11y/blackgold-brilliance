@@ -98,9 +98,11 @@ export type Database = {
           collection_id: string | null
           created_at: string
           description: string
+          featured: boolean
           id: string
           image_url: string
           name: string
+          section: string
           sort_order: number
           updated_at: string
         }
@@ -109,9 +111,11 @@ export type Database = {
           collection_id?: string | null
           created_at?: string
           description?: string
+          featured?: boolean
           id?: string
           image_url?: string
           name: string
+          section?: string
           sort_order?: number
           updated_at?: string
         }
@@ -120,9 +124,11 @@ export type Database = {
           collection_id?: string | null
           created_at?: string
           description?: string
+          featured?: boolean
           id?: string
           image_url?: string
           name?: string
+          section?: string
           sort_order?: number
           updated_at?: string
         }

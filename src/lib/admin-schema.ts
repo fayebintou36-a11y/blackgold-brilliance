@@ -15,7 +15,12 @@ export const collectionInput = z.object({
   image_url: imageUrlSchema.default(''),
   sort_order: z.number().int().min(0).max(9999).default(0),
 })
-export const pieceInput = collectionInput.extend({ collection_id: z.string().uuid().nullable().default(null) })
+export const photoSections = ['creations','galerie'] as const
+export const pieceInput = collectionInput.extend({
+  collection_id: z.string().uuid().nullable().default(null),
+  section: z.enum(photoSections).default('creations'),
+  featured: z.boolean().default(false),
+})
 export const publicPages = ['accueil','a-propos','creations','services','galerie','contact','rendez-vous','confidentialite','mentions-legales'] as const
 export const contentSections = ['titre','introduction','texte','texte-secondaire','titre-section','accroche'] as const
 export const pageContentInput = z.object({
