@@ -75,11 +75,40 @@ export const listPieces = createServerFn({ method: 'GET' })
     await requireAdmin(supabase, userId)
     const { data, error } = await supabase
       .from('pieces')
-      .select('*, collections(name)')
+      .select('*')
+      .order('section', { ascending: true })
       .order('sort_order', { ascending: true })
       .order('created_at', { ascending: true })
     if (error) throw new Error(error.message)
     return data ?? []
+  })
+
+export const movePiece = createServerFn({ method: 'POST' })
+  .middleware([requireSupabaseAuth])
+  .inputValidator(z.object({ id: z.string().uuid(), direction: z.enum(['up', 'down']) }))
+  .handler(async ({ data, context }) => {
+    const { supabase, userId } = context as AuthedContext
+    await requireAdmin(supabase, userId)
+    const { data: rows, error } = await supabase
+      .from('pieces')
+      .select('id, section, sort_order')
+      .order('section', { ascending: true })
+      .order('sort_order', { ascending: true })
+      .order('created_at', { ascending: true })
+    if (error) throw new Error(error.message)
+    const list = rows ?? []
+    const current = list.find((p) => p.id === data.id)
+    if (!current) throw new Error('Photo introuvable.')
+    const siblings = list.filter((p) => p.section === current.section)
+    const index = siblings.findIndex((p) => p.id === data.id)
+    const neighbor = data.direction === 'up' ? siblings[index - 1] : siblings[index + 1]
+    if (!neighbor) return { ok: true }
+    const now = new Date().toISOString()
+    const first = await supabase.from('pieces').update({ sort_order: neighbor.sort_order, updated_at: now }).eq('id', current.id)
+    if (first.error) throw new Error(first.error.message)
+    const second = await supabase.from('pieces').update({ sort_order: current.sort_order, updated_at: now }).eq('id', neighbor.id)
+    if (second.error) throw new Error(second.error.message)
+    return { ok: true }
   })
 
 export const savePiece = createServerFn({ method: 'POST' })
