@@ -103,11 +103,16 @@ export const movePiece = createServerFn({ method: 'POST' })
     const index = siblings.findIndex((p) => p.id === data.id)
     const neighbor = data.direction === 'up' ? siblings[index - 1] : siblings[index + 1]
     if (!neighbor) return { ok: true }
+    // Renumber the section sequentially so equal sort_order values still swap.
+    const reordered = [...siblings]
+    reordered[index] = neighbor
+    reordered[data.direction === 'up' ? index - 1 : index + 1] = current
     const now = new Date().toISOString()
-    const first = await supabase.from('pieces').update({ sort_order: neighbor.sort_order, updated_at: now }).eq('id', current.id)
-    if (first.error) throw new Error(first.error.message)
-    const second = await supabase.from('pieces').update({ sort_order: current.sort_order, updated_at: now }).eq('id', neighbor.id)
-    if (second.error) throw new Error(second.error.message)
+    for (let i = 0; i < reordered.length; i++) {
+      if (reordered[i].sort_order === i) continue
+      const { error: updateError } = await supabase.from('pieces').update({ sort_order: i, updated_at: now }).eq('id', reordered[i].id)
+      if (updateError) throw new Error(updateError.message)
+    }
     return { ok: true }
   })
 
