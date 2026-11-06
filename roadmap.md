@@ -20,6 +20,6 @@
 ## Photo sections
 - [x] Split photos into two admin-managed sections: Nos créations (outfits) and Galerie (shows, events), with lightbox on both pages.
 - [x] Admin photo management: add, categorize by section, edit title/description, replace, delete, reorder, feature on homepage.
-- [ ] Verify photo sections end-to-end as admin (add to each section, reorder, feature, public readback).
+- [x] Verify photo sections end-to-end as admin (add to each section, reorder, feature, public readback).
 
 Appointment management remains a later stage.
