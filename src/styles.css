@@ -664,3 +664,4 @@ h1,h2,h3 { font-family: var(--font-heading); font-weight: 400; letter-spacing: 0
 .runway-controls button:hover { background:var(--primary); color:var(--primary-foreground); }
 @media (max-width:640px) { .runway-section { padding:64px 12px 56px; } .runway-stage { height:420px; perspective:900px; } .runway-card { width:220px; margin-left:-110px; } }
 @media (prefers-reduced-motion: reduce) { .runway-card, .runway-card img { transition:none; } .runway-shine, .runway-caption strong { animation:none; } }
+.runway-head .eyebrow { justify-content:center; }

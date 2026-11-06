@@ -73,7 +73,7 @@ export function Runway3D() {
       </div>
       <div className="runway-caption" aria-live="polite">
         <span>{String(active + 1).padStart(2, '0')} / {String(n).padStart(2, '0')}</span>
-        <strong key={active}>{looks[active].title}</strong>
+        <strong key={active}>{looks[active]?.title}</strong>
       </div>
       <div className="runway-controls">
         <button type="button" onClick={() => go(-1)} aria-label="Tenue précédente"><ChevronLeft size={20} /></button>
