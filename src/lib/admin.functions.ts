@@ -109,8 +109,9 @@ export const movePiece = createServerFn({ method: 'POST' })
     reordered[data.direction === 'up' ? index - 1 : index + 1] = current
     const now = new Date().toISOString()
     for (let i = 0; i < reordered.length; i++) {
-      if (reordered[i].sort_order === i) continue
-      const { error: updateError } = await supabase.from('pieces').update({ sort_order: i, updated_at: now }).eq('id', reordered[i].id)
+      const row = reordered[i]
+      if (!row || row.sort_order === i) continue
+      const { error: updateError } = await supabase.from('pieces').update({ sort_order: i, updated_at: now }).eq('id', row.id)
       if (updateError) throw new Error(updateError.message)
     }
     return { ok: true }
