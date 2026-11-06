@@ -10,6 +10,16 @@ import d7 from '@/assets/defile/defile-7.jpeg.asset.json'
 import d8 from '@/assets/defile/defile-8.jpeg.asset.json'
 import d9 from '@/assets/defile/defile-9.jpeg.asset.json'
 import d10 from '@/assets/defile/defile-10.jpeg.asset.json'
+import d11 from '@/assets/defile/defile-11.jpeg.asset.json'
+import d12 from '@/assets/defile/defile-12.jpeg.asset.json'
+import d13 from '@/assets/defile/defile-13.jpeg.asset.json'
+import d14 from '@/assets/defile/defile-14.jpeg.asset.json'
+import d15 from '@/assets/defile/defile-15.jpeg.asset.json'
+import d16 from '@/assets/defile/defile-16.jpeg.asset.json'
+import d17 from '@/assets/defile/defile-17.jpeg.asset.json'
+import d18 from '@/assets/defile/defile-18.jpeg.asset.json'
+import d19 from '@/assets/defile/defile-19.jpeg.asset.json'
+import d20 from '@/assets/defile/defile-20.jpeg.asset.json'
 
 const looks = [
   { src: d1.url, title: 'Grand boubou noir', alt: 'Homme en grand boubou noir à motifs géométriques dorés et blancs' },
@@ -22,6 +32,16 @@ const looks = [
   { src: d8.url, title: 'Couple signature', alt: 'Couple en boubous noirs brodés d’or assortis' },
   { src: d9.url, title: 'Blanc et or', alt: 'Femme en boubou blanc à broderies dorées' },
   { src: d10.url, title: 'Duo ivoire', alt: 'Couple en tenues blanches brodées assorties' },
+  { src: d11.url, title: 'Blanc de scène', alt: 'Femme en boubou blanc brodé d’or sur scène' },
+  { src: d12.url, title: 'Duo bazin noir et or', alt: 'Couple en boubous bazin noir brodés d’or' },
+  { src: d13.url, title: 'Le fondateur en ivoire', alt: 'Omar Diouf en grand boubou ivoire brodé' },
+  { src: d14.url, title: 'Or et ivoire', alt: 'Deux femmes en tenues dorée et ivoire brodées' },
+  { src: d15.url, title: 'Corail royal', alt: 'Femme en boubou corail entièrement brodé' },
+  { src: d16.url, title: 'Couleurs du Sénégal', alt: 'Mannequins en tenues vertes, rouges et jaunes' },
+  { src: d17.url, title: 'Élégance ivoire et noir', alt: 'Femme en robe longue beige et noire' },
+  { src: d18.url, title: 'Ivoire et or', alt: 'Homme en grand boubou blanc aux motifs dorés' },
+  { src: d19.url, title: 'Mariés en bazin', alt: 'Couple en tenues dorée et blanche brodées' },
+  { src: d20.url, title: 'Noir majestueux', alt: 'Homme en grand boubou noir assis dans un salon' },
 ]
 
 export function Runway3D() {
