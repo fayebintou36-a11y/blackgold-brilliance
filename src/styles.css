@@ -395,6 +395,10 @@ h1,h2,h3 { font-family: var(--font-heading); font-weight: 400; letter-spacing: 0
 .admin-table th,.admin-table td { padding:16px 12px; border-bottom:1px solid var(--border); overflow-wrap:anywhere; }
 .admin-table th { color:var(--muted-foreground); font-weight:500; }
 .admin-row-actions { display:flex; gap:8px; justify-content:end; }
+.admin-thumb { width:48px; height:48px; object-fit:cover; border:1px solid var(--border); border-radius:2px; }
+.admin-star { display:inline-block; margin-left:6px; color:var(--primary); vertical-align:middle; }
+.admin-checkbox { grid-column:1/-1; display:flex; align-items:center; gap:10px; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted-foreground); cursor:pointer; }
+.admin-checkbox input { width:16px; height:16px; accent-color:var(--primary); }
 .admin-excerpt { max-width:300px; }
 .admin-cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
 .admin-card { border:1px solid var(--border); border-radius:4px; padding:28px; background:var(--card); }
