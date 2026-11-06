@@ -11,7 +11,7 @@ import { useServerFn } from '@tanstack/react-start'
 const adminNav = [
   { to: '/admin', label: 'Tableau de bord' },
   { to: '/admin/collections', label: 'Collections' },
-  { to: '/admin/pieces', label: 'Pièces' },
+  { to: '/admin/pieces', label: 'Photos' },
   { to: '/admin/contenus', label: 'Contenus' },
 ] as const
 
