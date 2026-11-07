@@ -23,3 +23,8 @@
 - [x] Verify photo sections end-to-end as admin (add to each section, reorder, feature, public readback).
 
 Appointment management remains a later stage.
+
+## Installable mobile application
+- [ ] Confirm the source version to change: uploaded brief requires existing Cloudflare Workers/D1/R2, but the available checkout still uses Lovable Cloud.
+- [ ] Add branded installability, guarded offline support and mobile-first presentation to the confirmed version, preserving features and data.
+- [ ] Verify phone/tablet layouts, photos, navigation, installation/offline behavior and authenticated administration; report device and external-deployment limitations.
