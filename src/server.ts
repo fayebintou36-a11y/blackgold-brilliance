@@ -46,6 +46,15 @@ function isH3SwallowedErrorBody(body: string): boolean {
 
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
+    // Photos/logo are Lovable-hosted (/__l5e/assets-v1/...). Lovable hosting serves them
+    // itself; on external hosts (Cloudflare) relay them from the published Lovable site.
+    const url = new URL(request.url);
+    if (url.pathname.startsWith("/__l5e/assets-v1/") && request.method === "GET") {
+      const upstream = await fetch(`https://blackgold-brilliance.lovable.app${url.pathname}`);
+      const headers = new Headers(upstream.headers);
+      if (upstream.ok) headers.set("cache-control", "public, max-age=31536000, immutable");
+      return new Response(upstream.body, { status: upstream.status, headers });
+    }
     try {
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
