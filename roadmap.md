@@ -25,6 +25,6 @@
 Appointment management remains a later stage.
 
 ## Installable mobile application
-- [ ] Confirm the source version to change: uploaded brief requires existing Cloudflare Workers/D1/R2, but the available checkout still uses Lovable Cloud.
-- [ ] Add branded installability, guarded offline support and mobile-first presentation to the confirmed version, preserving features and data.
+- [x] Version confirmed: Lovable Cloud.
+- [x] Add branded (installable; offline skipped) installability, guarded offline support and mobile-first presentation to the confirmed version, preserving features and data.
 - [ ] Verify phone/tablet layouts, photos, navigation, installation/offline behavior and authenticated administration; report device and external-deployment limitations.
