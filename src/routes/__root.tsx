@@ -123,6 +123,12 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const router = useRouter();
   useEffect(() => {
+    // Elegant placeholder for images that genuinely fail to load.
+    const onError = (e: Event) => { if (e.target instanceof HTMLImageElement) e.target.classList.add('img-unavailable'); };
+    document.addEventListener('error', onError, true);
+    return () => document.removeEventListener('error', onError, true);
+  }, []);
+  useEffect(() => {
     const { data } = supabase.auth.onAuthStateChange(event => {
       if (event !== 'SIGNED_IN' && event !== 'SIGNED_OUT' && event !== 'USER_UPDATED') return;
       void router.invalidate();
