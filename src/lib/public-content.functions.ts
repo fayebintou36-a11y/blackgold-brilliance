@@ -3,8 +3,9 @@ import { createClient } from '@supabase/supabase-js'
 import type { Database } from '@/integrations/supabase/types'
 
 export const getPublicContent = createServerFn({ method: 'GET' }).handler(async () => {
-  const url = process.env['SUPABASE_URL']
-  const key = process.env['SUPABASE_PUBLISHABLE_KEY']
+  // Fallback to build-time public values so external hosts (Cloudflare) work without server secrets.
+  const url = process.env['SUPABASE_URL'] || import.meta.env['VITE_SUPABASE_URL']
+  const key = process.env['SUPABASE_PUBLISHABLE_KEY'] || import.meta.env['VITE_SUPABASE_PUBLISHABLE_KEY']
   if (!url || !key) throw new Error('Le contenu du site est momentanément indisponible.')
   const client = createClient<Database>(url, key, {
     auth: { persistSession:false, autoRefreshToken:false },

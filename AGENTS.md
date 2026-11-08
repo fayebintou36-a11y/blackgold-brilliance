@@ -15,3 +15,4 @@
 - Outfit advice uses a same-origin validated streaming server endpoint with server-only AI Gateway helpers; a service-only circuit breaker persists access blocks without storing visitor descriptions.
 - Password recovery restores browser sessions through getSession and a synchronous auth-state listener with loading, timeout and retry states, so refresh and late session restoration cannot leave the form inaccessible.
 - Homepage photo rotation lives in a dedicated presentation component with manual selection, pause and reduced-motion support, keeping the original uploaded photographs intact.
+- Public reads and published photo links use only the publishable key with build-time VITE_ fallbacks, so external hosts without server secrets keep working.
