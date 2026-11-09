@@ -346,6 +346,27 @@ h1,h2,h3 { font-family: var(--font-heading); font-weight: 400; letter-spacing: 0
 }
 .advisor-spinner { animation:advisor-spin 1.5s linear infinite; }
 @keyframes advisor-spin { to { transform:rotate(360deg); } }
+.advisor-awards { margin-top:70px; padding-top:50px; border-top:1px solid var(--border); }
+.awards-heading { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:14px; margin-bottom:34px; }
+.awards-heading .eyebrow { display:inline-flex; align-items:center; gap:8px; }
+.awards-heading p { font-size:12px; color:var(--muted-foreground); font-style:italic; }
+.awards-grid { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:26px; }
+.award-card { margin:0; opacity:1; transform:none; transition:opacity .9s ease, transform .9s cubic-bezier(.22,1,.36,1); }
+.awards-pending .award-card { opacity:0; transform:translateY(28px); }
+@media(prefers-reduced-motion:reduce) { .awards-pending .award-card { opacity:1; transform:none; } .award-card { transition:none; } }
+.award-frame { position:relative; overflow:hidden; border:1px solid color-mix(in oklab, var(--primary) 45%, transparent); background:var(--card); }
+.award-frame::after { content:""; position:absolute; inset:10px; border:1px solid color-mix(in oklab, var(--primary) 25%, transparent); pointer-events:none; }
+.award-frame img { display:block; width:100%; aspect-ratio:4/5; object-fit:cover; object-position:center top; transition:transform 1s cubic-bezier(.22,1,.36,1); }
+.award-card:hover .award-frame img { transform:scale(1.03); }
+.award-card figcaption { display:grid; gap:4px; padding:16px 2px 0; }
+.award-number { font-size:9px; letter-spacing:.3em; color:var(--primary); }
+.award-title { font-size:15px; font-weight:600; }
+.award-caption { font-size:10px; color:var(--muted-foreground); font-style:italic; }
+@media(max-width:900px) {
+  .advisor-awards { margin-top:50px; padding-top:38px; }
+  .awards-grid { grid-template-columns:1fr; gap:30px; }
+  .award-frame img { aspect-ratio:4/3; object-position:center 20%; }
+}
 @media(min-width:1600px) { .senegal-hero .hero-image { object-position:center 20%; } }
 @media(max-width:760px) {
  .senegal-hero { height:auto; min-height:0; }

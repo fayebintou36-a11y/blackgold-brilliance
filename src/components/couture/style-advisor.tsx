@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { ArrowUpRight, LoaderCircle, Sparkles, Square } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 import { Button } from '@/components/ui/button'
+import { AdvisorAwards } from '@/components/couture/advisor-awards'
 
 export function StyleAdvisor() {
   const [loading, setLoading] = useState(false)
@@ -66,5 +67,6 @@ export function StyleAdvisor() {
         {text && <><div className="advice-prose"><ReactMarkdown components={{ a: ({ children }) => <span>{children}</span> }}>{text}</ReactMarkdown></div>{!loading && !error && <Button variant="coutureOutline" asChild><a href="tel:773735370">EN PARLER À L’ATELIER <ArrowUpRight/></a></Button>}</>}
       </div>
     </div>
+    <AdvisorAwards/>
   </section>
 }
