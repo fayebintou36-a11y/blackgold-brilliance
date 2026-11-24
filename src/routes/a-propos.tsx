@@ -1,5 +1,6 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { Scissors } from 'lucide-react'
+import { createFileRoute, Link } from '@tanstack/react-router'
+import { ArrowUpRight, Scissors } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import { Site, PageIntro, AppointmentBand, pageHead } from '@/components/couture/site'
 import hero from '@/assets/a-propos-bazin-bleu.jpeg.asset.json'
 
@@ -22,6 +23,7 @@ function About() {
         <p className="prose-copy">Omar Wally Fashion façonne des tenues qui racontent une histoire : celle d’un savoir-faire sénégalais, d’un tissu noble et d’une allure assumée. Des silhouettes traditionnelles aux tenues de cérémonie, chaque pièce naît d’une exigence — la coupe, la broderie, la finition.</p>
         <blockquote className="about-quote">« Un vêtement réussi ne se remarque pas seulement : il se raconte. »</blockquote>
         <ol className="about-pillars">{pillars.map(p => <li key={p.n}><span>{p.n}</span><div><h3>{p.title}</h3><p>{p.copy}</p></div></li>)}</ol>
+        <Button variant="couture" className="about-gallery-btn" asChild><Link to="/galerie">VOIR LA GALERIE <ArrowUpRight size={15} /></Link></Button>
       </div>
       <figure className="about-portrait about-legend-figure">
         <div className="about-legend-frame"><img className="about-image" src={hero.url} alt="Homme en tenue de bazin bleu roi à broderie ton sur ton, dans l’atelier Omar Wally Fashion" width={854} height={1280} loading="lazy" /></div>

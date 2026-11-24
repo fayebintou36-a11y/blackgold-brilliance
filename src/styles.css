@@ -747,3 +747,13 @@ img.img-unavailable { visibility: visible; color: transparent; background: radia
 .about-legend-caption em{color:var(--primary);font-family:var(--font-heading);font-size:21px}
 @media (max-width:640px){.about-quote{font-size:20px}.about-legend-frame{padding:8px}}
 @media (prefers-reduced-motion:reduce){.about-legend-figure:hover .about-image{transform:none}}
+.about-gallery-btn{margin-top:32px}
+@media (min-width:1001px){.about-legend{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:64px}.about-legend .about-portrait{max-width:none}}
+@media (max-width:640px){
+.atelier-ring-section .runway-head h2{font-size:30px;line-height:1.15}
+.atelier-ring-section .runway-head p{font-size:14px;line-height:1.55}
+.atelier-ring-section .runway-caption strong{font-size:22px}
+.atelier-ring-section .runway-caption span{font-size:11px}
+.gallery-hd h3{font-size:20px!important;margin-top:12px!important}
+.gallery-hd p{font-size:11px}
+}
