@@ -18,5 +18,9 @@ export const Route=createFileRoute('/api/public/couture-image')({server:{handler
   const {data,error}=await supabaseAdmin.storage.from('couture-images').createSignedUrl(file,300)
   if(error||!data)return new Response('Not found',{status:404})
   return new Response(null,{status:302,headers:{Location:data.signedUrl,'Cache-Control':'no-store'}})
- }catch{return new Response('Unavailable',{status:503})}
+ }catch{
+  // External hosts (Cloudflare copy) have no server secret: hand off to the published Lovable site.
+  if(new URL(request.url).hostname!=='blackgold-brillianc.lovable.app')return new Response(null,{status:302,headers:{Location:`https://blackgold-brillianc.lovable.app${ref}`,'Cache-Control':'no-store'}})
+  return new Response('Unavailable',{status:503})
+ }
 }}}})
