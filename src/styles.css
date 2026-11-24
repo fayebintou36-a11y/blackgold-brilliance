@@ -717,3 +717,12 @@ img.img-unavailable { visibility: visible; color: transparent; background: radia
 .atelier-ring-section .runway-head h2{text-align:center}
 .atelier-ring-stage{--ring-r:clamp(260px,34vw,460px);--g-w:clamp(160px,17vw,220px);height:calc(var(--g-w)*1.45 + 90px)}
 .atelier-ring-stage{--g-w:clamp(140px,15vw,210px);--ring-r:calc(var(--g-w)*2.8);perspective:2000px}
+@media (max-width:640px){
+.atelier-ring-section{padding:3.5rem 1rem 3rem}
+.atelier-ring-stage{--g-w:min(56vw,230px);--ring-r:calc(var(--g-w)*2.8);perspective:1100px;margin-top:1.5rem}
+.atelier-rail{left:4%;right:4%}
+.atelier-hanger{width:26px;height:20px;top:-20px;margin-left:-13px}
+.atelier-ring-section .runway-controls button{min-width:44px;min-height:44px}
+.gallery-hd{grid-template-columns:1fr;gap:2rem}
+.gallery-hd .collection-image img{width:100%;height:auto;max-height:80vh;object-fit:cover}
+}
