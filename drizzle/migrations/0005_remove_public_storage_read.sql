@@ -1,0 +1,1 @@
+DROP POLICY IF EXISTS "Public can read published couture images" ON storage.objects;

@@ -36,6 +36,13 @@
       "when": 1794096439553,
       "tag": "0004_public_read_referenced_couture_images",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1795480538378,
+      "tag": "0005_remove_public_storage_read",
+      "breakpoints": true
     }
   ]
 }
