@@ -767,3 +767,7 @@ img.img-unavailable { visibility: visible; color: transparent; background: radia
 .whatsapp-float:hover,.whatsapp-float:focus-visible{background:var(--primary);color:var(--primary-foreground);transform:translateY(-2px)}
 @media (max-width:640px){.whatsapp-float{right:14px;bottom:14px;width:52px;padding:0;justify-content:center}.whatsapp-float span{display:none}}
 @media (prefers-reduced-motion:reduce){.whatsapp-float{transition:none}.whatsapp-float:hover{transform:none}}
+:root{--whatsapp:#25D366;--whatsapp-dark:#128C7E;--whatsapp-foreground:#ffffff}
+.whatsapp-float{background:var(--whatsapp);color:var(--whatsapp-foreground);border-color:var(--whatsapp);box-shadow:0 8px 24px color-mix(in oklab,var(--whatsapp) 35%,transparent)}
+.whatsapp-float:hover,.whatsapp-float:focus-visible{background:var(--whatsapp-dark);border-color:var(--whatsapp-dark);color:var(--whatsapp-foreground)}
+@media (min-width:641px){.whatsapp-float{min-height:42px;padding:0 15px;gap:6px;font-size:11px}.whatsapp-float svg{width:18px;height:18px}}
