@@ -760,3 +760,4 @@ img.img-unavailable { visibility: visible; color: transparent; background: radia
 .about-legend{gap:36px}
 @media (min-width:1001px){.about-legend{gap:40px}}
 @media (max-width:1000px){.about-legend{gap:24px}}
+.about-legend .about-pillars{gap:30px}@media (max-width:640px){.about-legend .about-pillars{gap:24px}}
