@@ -21,7 +21,8 @@ import d18 from '@/assets/defile/defile-18.jpeg.asset.json'
 import d19 from '@/assets/defile/defile-19.jpeg.asset.json'
 import d20 from '@/assets/defile/defile-20.jpeg.asset.json'
 
-const looks = [
+export type RunwayLook={src:string;title:string;alt:string}
+const looks: RunwayLook[] = [
   { src: d1.url, title: 'Grand boubou noir', alt: 'Homme en grand boubou noir à motifs géométriques dorés et blancs' },
   { src: d2.url, title: 'Bazin noir brodé or', alt: 'Femme en boubou bazin noir brodé d’or, bras ouverts' },
   { src: d3.url, title: 'Duo cérémonie', alt: 'Deux hommes en grands boubous violet et ivoire brodés' },
@@ -44,10 +45,10 @@ const looks = [
   { src: d20.url, title: 'Noir majestueux', alt: 'Homme en grand boubou noir assis dans un salon' },
 ]
 
-export function Runway3D() {
+export function Runway3D({items=looks,eyebrow='LE DÉFILÉ',title='Sur le podium Omar Wally',copy='Une sélection de nos tenues, présentée comme sur un podium.'}:{items?:RunwayLook[];eyebrow?:string;title?:string;copy?:string}={}) {
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
-  const n = looks.length
+  const n = items.length
   useEffect(() => {
     if (paused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const t = window.setInterval(() => setActive((a) => (a + 1) % n), 4200)
@@ -56,15 +57,15 @@ export function Runway3D() {
   const go = (d: number) => setActive((a) => (a + d + n) % n)
 
   return (
-    <section className="runway-section" aria-label="Défilé 3D des créations">
+    <section className="runway-section" aria-label={title}>
       <div className="runway-head">
-        <p className="eyebrow">LE DÉFILÉ</p>
-        <h2>Sur le podium Omar Wally</h2>
-        <p>Une sélection de nos tenues, présentée comme sur un podium.</p>
+        <p className="eyebrow">{eyebrow}</p>
+        <h2>{title}</h2>
+        <p>{copy}</p>
       </div>
       <div className="runway-stage" onKeyDown={(e) => { if (e.key === 'ArrowRight') go(1); if (e.key === 'ArrowLeft') go(-1) }}>
         <div className="runway-floor" aria-hidden="true" />
-        {looks.map((l, i) => {
+        {items.map((l, i) => {
           let off = i - active
           if (off > n / 2) off -= n
           if (off < -n / 2) off += n
@@ -93,7 +94,7 @@ export function Runway3D() {
       </div>
       <div className="runway-caption" aria-live="polite">
         <span>{String(active + 1).padStart(2, '0')} / {String(n).padStart(2, '0')}</span>
-        <strong key={active}>{looks[active]?.title}</strong>
+        <strong key={active}>{items[active]?.title}</strong>
       </div>
       <div className="runway-controls">
         <button type="button" onClick={() => go(-1)} aria-label="Tenue précédente"><ChevronLeft size={20} /></button>
