@@ -727,3 +727,23 @@ img.img-unavailable { visibility: visible; color: transparent; background: radia
 .gallery-hd .collection-image img{width:100%;height:auto;max-height:80vh;object-fit:cover}
 }
 @media (max-width:640px){.gallery-hd .collection-image{aspect-ratio:4/5;height:auto;width:100%}.gallery-hd .collection-image img{height:100%;max-height:none;object-position:50% 20%}}
+
+/* À propos : style légende */
+.about-legend h2 em{color:var(--primary);font-style:italic}
+.about-legend .hero-rule{justify-content:flex-start;margin:0 0 24px}
+.about-quote{margin:28px 0;padding-left:20px;border-left:2px solid var(--primary);font-family:var(--font-heading);font-size:24px;font-style:italic;line-height:1.4;color:var(--foreground)}
+.about-pillars{list-style:none;padding:0;margin:0;display:grid;gap:18px}
+.about-pillars li{display:grid;grid-template-columns:44px 1fr;gap:14px;padding-top:16px;border-top:1px solid var(--border)}
+.about-pillars span{font-family:var(--font-heading);font-size:22px;color:var(--primary)}
+.about-pillars h3{font-size:20px;margin:0 0 4px}
+.about-pillars p{margin:0;font-size:14px;color:var(--muted-foreground);line-height:1.6}
+.about-legend-frame{position:relative;padding:14px;border:1px solid color-mix(in oklab,var(--primary) 45%,transparent)}
+.about-legend-frame::after{content:"";position:absolute;inset:6px;border:1px dashed color-mix(in oklab,var(--primary) 35%,transparent);pointer-events:none}
+.about-legend-frame .about-image{display:block;width:100%;aspect-ratio:2/3;object-fit:cover;object-position:50% 15%;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.about-legend-frame{overflow:hidden}
+@media (hover:hover){.about-legend-figure:hover .about-image{transform:scale(1.03)}}
+.about-legend-caption{display:flex;flex-direction:column;gap:6px;margin-top:16px;padding-top:14px;border-top:1px solid var(--border)}
+.about-legend-caption span{font-size:11px;letter-spacing:.22em;color:var(--muted-foreground)}
+.about-legend-caption em{color:var(--primary);font-family:var(--font-heading);font-size:21px}
+@media (max-width:640px){.about-quote{font-size:20px}.about-legend-frame{padding:8px}}
+@media (prefers-reduced-motion:reduce){.about-legend-figure:hover .about-image{transform:none}}
