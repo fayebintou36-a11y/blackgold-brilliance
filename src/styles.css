@@ -757,3 +757,6 @@ img.img-unavailable { visibility: visible; color: transparent; background: radia
 .gallery-hd h3{font-size:20px!important;margin-top:12px!important}
 .gallery-hd p{font-size:11px}
 }
+.about-legend{gap:36px}
+@media (min-width:1001px){.about-legend{gap:40px}}
+@media (max-width:1000px){.about-legend{gap:24px}}
