@@ -696,3 +696,24 @@ img.img-unavailable { visibility: visible; color: transparent; background: radia
 .gallery-hd .collection-image img{image-rendering:auto;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
 @media (hover:hover){.gallery-hd article:hover .collection-image{transform:rotateX(4deg) rotateY(-6deg) translateZ(12px);box-shadow:0 30px 60px -20px color-mix(in oklab,var(--primary) 55%,transparent)}.gallery-hd article:hover img{transform:scale(1.04)}}
 @media (prefers-reduced-motion:reduce){.gallery-hd article:hover .collection-image,.gallery-hd article:hover img{transform:none}}
+
+/* Galerie : portant 3D de l'atelier */
+.atelier-ring-section{position:relative;overflow:hidden;padding:5rem 1.25rem 4rem;background:radial-gradient(ellipse at 50% 40%,color-mix(in oklab,var(--primary) 14%,transparent),transparent 65%),var(--background)}
+.atelier-ring-section .runway-head em{color:var(--primary);font-style:italic}
+.atelier-ring-stage{--ring-r:clamp(260px,42vw,560px);--g-w:clamp(150px,18vw,230px);position:relative;height:clamp(380px,48vw,560px);margin-top:2.5rem;perspective:1600px;perspective-origin:50% 30%;touch-action:pan-y;cursor:grab;user-select:none}
+.atelier-ring-stage:active{cursor:grabbing}
+.atelier-rail{position:absolute;left:8%;right:8%;top:6px;height:2px;background:linear-gradient(90deg,transparent,var(--primary),transparent);display:flex;justify-content:center;color:var(--primary)}
+.atelier-rail svg{margin-top:-8px;background:var(--background);padding:0 6px;box-sizing:content-box}
+.atelier-ring{position:absolute;left:50%;top:28px;width:var(--g-w);height:calc(var(--g-w)*1.45);margin-left:calc(var(--g-w)/-2);transform-style:preserve-3d;transition:transform 1.1s cubic-bezier(.22,.8,.2,1)}
+.atelier-garment{position:absolute;inset:0;padding:0;border:1px solid color-mix(in oklab,var(--primary) 35%,transparent);background:var(--card);backface-visibility:hidden;transition:filter .8s,border-color .8s,box-shadow .8s;filter:brightness(.45) saturate(.7);outline-offset:4px}
+.atelier-garment img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block;pointer-events:none}
+.atelier-garment::after{content:"";position:absolute;inset:6px;border:1px dashed color-mix(in oklab,var(--primary) 45%,transparent);pointer-events:none}
+.atelier-garment.is-active{filter:none;border-color:var(--primary);box-shadow:0 30px 70px -20px color-mix(in oklab,var(--primary) 60%,transparent)}
+.atelier-hanger{position:absolute;top:-26px;left:50%;width:34px;height:26px;margin-left:-17px;border:2px solid var(--primary);border-bottom:0;border-radius:50% 50% 0 0}
+.atelier-floor{position:absolute;left:50%;bottom:0;width:min(90%,900px);height:60px;transform:translateX(-50%);background:radial-gradient(ellipse at center,color-mix(in oklab,var(--primary) 30%,transparent),transparent 70%);filter:blur(8px)}
+@media (max-width:640px){.atelier-ring-stage{--ring-r:220px;--g-w:150px;height:340px}}
+@media (prefers-reduced-motion:reduce){.atelier-ring{transition:none}}
+.atelier-ring-section .runway-head{text-align:center;margin-inline:auto;max-width:56rem}
+.atelier-ring-section .runway-head h2{text-align:center}
+.atelier-ring-stage{--ring-r:clamp(260px,34vw,460px);--g-w:clamp(160px,17vw,220px);height:calc(var(--g-w)*1.45 + 90px)}
+.atelier-ring-stage{--g-w:clamp(140px,15vw,210px);--ring-r:calc(var(--g-w)*2.8);perspective:2000px}
