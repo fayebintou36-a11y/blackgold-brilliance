@@ -726,3 +726,4 @@ img.img-unavailable { visibility: visible; color: transparent; background: radia
 .gallery-hd{grid-template-columns:1fr;gap:2rem}
 .gallery-hd .collection-image img{width:100%;height:auto;max-height:80vh;object-fit:cover}
 }
+@media (max-width:640px){.gallery-hd .collection-image{aspect-ratio:4/5;height:auto;width:100%}.gallery-hd .collection-image img{height:100%;max-height:none;object-position:50% 20%}}
